@@ -14,10 +14,10 @@ function initializeDatabase() {
   }
 
   console.log('データベースの初期化を開始します...');
-  
+
   // データベース接続
   const db = new sqlite3.Database(dbPath);
-  
+
   db.serialize(() => {
     // レコードテーブルの作成
     db.run(`CREATE TABLE IF NOT EXISTS records (
@@ -36,7 +36,8 @@ function initializeDatabase() {
       music_link TEXT,
       acquisition_date TEXT,
       storage_location TEXT,
-      catalog_number TEXT
+      catalog_number TEXT,
+      discogs_id TEXT
     )`, (err) => {
       if (err) {
         console.error('テーブル作成エラー:', err);

@@ -31,26 +31,27 @@ router.get('/:id', (req, res) => {
 // 新しいレコードの追加
 router.post('/', (req, res) => {
   const record = req.body;
-  
+
   // IDの生成（最大のID + 1）
   db.get('SELECT MAX(CAST(id AS INTEGER)) as maxId FROM records', [], (err, row) => {
     if (err) {
       console.error('IDの生成中にエラーが発生しました:', err);
       return res.status(500).json({ error: 'レコードの追加に失敗しました' });
     }
-    
+
     // 新しいID
     const newId = (row.maxId + 1).toString();
-    
+
     // レコードの挿入
     const stmt = db.prepare(`
       INSERT INTO records (
-        id, artist, album_name, release_year, genre, country, size, 
-        label, compilation, star, review, alphabet_artist, 
-        music_link, acquisition_date, storage_location, catalog_number
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, artist, album_name, release_year, genre, country, size,
+        label, compilation, star, review, alphabet_artist,
+        music_link, acquisition_date, storage_location, catalog_number,
+        discogs_url, thumbnail_image, full_image
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
-    
+
     stmt.run(
       newId,
       record.artist,
@@ -68,12 +69,15 @@ router.post('/', (req, res) => {
       record.acquisition_date,
       record.storage_location,
       record.catalog_number,
+      record.discogs_url,
+      record.thumbnail_image,
+      record.full_image,
       function(err) {
         if (err) {
           console.error('レコードの追加中にエラーが発生しました:', err);
           return res.status(500).json({ error: 'レコードの追加に失敗しました' });
         }
-        
+
         // 追加されたレコードを返す
         db.get('SELECT * FROM records WHERE id = ?', [newId], (err, row) => {
           if (err) {
@@ -84,7 +88,7 @@ router.post('/', (req, res) => {
         });
       }
     );
-    
+
     stmt.finalize();
   });
 });
@@ -93,7 +97,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const record = req.body;
-  
+
   const stmt = db.prepare(`
     UPDATE records SET
       artist = ?,
@@ -110,10 +114,11 @@ router.put('/:id', (req, res) => {
       music_link = ?,
       acquisition_date = ?,
       storage_location = ?,
-      catalog_number = ?
+      catalog_number = ?,
+      discogs_id = ?,
     WHERE id = ?
   `);
-  
+
   stmt.run(
     record.artist,
     record.album_name,
@@ -130,17 +135,18 @@ router.put('/:id', (req, res) => {
     record.acquisition_date,
     record.storage_location,
     record.catalog_number,
+    record.discogs_id,
     id,
     function(err) {
       if (err) {
         console.error('レコードの更新中にエラーが発生しました:', err);
         return res.status(500).json({ error: 'レコードの更新に失敗しました' });
       }
-      
+
       if (this.changes === 0) {
         return res.status(404).json({ error: '更新するレコードが見つかりません' });
       }
-      
+
       // 更新されたレコードを返す
       db.get('SELECT * FROM records WHERE id = ?', [id], (err, row) => {
         if (err) {
@@ -151,24 +157,24 @@ router.put('/:id', (req, res) => {
       });
     }
   );
-  
+
   stmt.finalize();
 });
 
 // レコードの削除
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
-  
+
   db.run('DELETE FROM records WHERE id = ?', id, function(err) {
     if (err) {
       console.error('レコードの削除中にエラーが発生しました:', err);
       return res.status(500).json({ error: 'レコードの削除に失敗しました' });
     }
-    
+
     if (this.changes === 0) {
       return res.status(404).json({ error: '削除するレコードが見つかりません' });
     }
-    
+
     res.json({ success: true, message: 'レコードが削除されました' });
   });
 });
