@@ -12,24 +12,27 @@ const errorHandler = require('./middleware/errorHandler');
 // ルーター
 const routes = require('./routes');
 
+// 環境変数から設定を取得
+const PORT = process.env.BACKEND_PORT || 3001;
+const HOST = process.env.BACKEND_HOST || '0.0.0.0';
+
+// CORS origin を FRONTEND_HOST と FRONTEND_PORT から動的に生成
+const corsOrigins = [
+  `http://${process.env.FRONTEND_HOST}:${process.env.FRONTEND_PORT}`,
+  `http://localhost:${process.env.FRONTEND_PORT}`,
+  'http://localhost:3000'  // 開発環境用の追加オプション
+].filter(Boolean);  // nullや空文字を除外
+
+
 // アプリケーションの初期化
 const app = express();
-const PORT = process.env.BACKEND_PORT || 3001;
-const HOST = '0.0.0.0';  // Dockerコンテナ内での接続のため
 
 // データベース接続
 const db = initializeDatabase();
 
 // CORS設定
 app.use(cors({
-  origin: [
-    'http://frontend:3000',
-    'http://localhost:3000',
-    'http://backend:3001',
-    'http://localhost:3001'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: corsOrigins,
   credentials: true
 }));
 
