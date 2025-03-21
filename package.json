@@ -9,11 +9,15 @@
     "axios": "^1.8.4",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.1",
     "disconnect": "^1.2.2",
     "dotenv": "^16.4.7",
+    "dotenv-webpack": "^8.1.0",
     "express": "^4.18.2",
     "express-session": "^1.18.1",
     "http-proxy-middleware": "^3.0.3",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.4.0",
@@ -27,7 +31,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node -r dotenv/config server/server.js",
-    "init-db": "node server/init-db.js"
+    "init-db": "node server/init-db.js",
+    "lint:eslint": "eslint src/",
+    "lint:prettier": "prettier --check src/",
+    "type-check": "tsc --noEmit",
+    "lint": "npm run type-check && npm run lint:eslint && npm run lint:prettier",
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "fix:prettier": "npm run lint:prettier -- --write",
+    "fix": "npm run fix:prettier && npm run fix:eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +57,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.1",
+    "prettier": "^3.5.3"
   }
 }
