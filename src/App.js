@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import RecordList from './components/RecordList';
-import RecordFilter from './components/RecordFilter';
-import RecordDetail from './components/RecordDetail';
-import AddRecordForm from './components/AddRecordForm';
-import DiscogsCallback from './components/DiscogsCallback';
-import DiscogsSearch from './components/DiscogsSearch';
-import DiscogsAuthButton from './components/DiscogsAuthButton';
+import RecordList from './components/records/list/RecordList';
+import RecordFilter from './components/records/filter/RecordFilter';
+import RecordDetail from './components/records/detail/RecordDetail';
+import AddRecordForm from './components/records/form/AddRecordForm';
+import DiscogsCallback from './components/discogs/DiscogsCallback';
+import DiscogsSearch from './components/discogs/DiscogsSearch';
+import DiscogsAuthButton from './components/discogs/DiscogsAuthButton';
 import { useRecords } from './hooks/useRecords';
-import ErrorView from './components/ErrorView';
-import LoadingView from './components/LoadingView';
+import ErrorView from './components/common/ErrorView';
+import LoadingView from './components/common/LoadingView';
 import { DiscogsAuthProvider, useDiscogsAuth } from './contexts/DiscogsAuthContext';
 
 // AppコンテンツをAuthコンテキストを使うように分離

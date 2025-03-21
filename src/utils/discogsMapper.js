@@ -28,7 +28,7 @@ export const mapDiscogsReleaseToRecord = (release) => {
     review: '',
     // アーティスト名をアルファベット表記としてそのまま使用
     alphabet_artist: artistName,
-    music_link: release.resource_url || '',
+    music_link: '', // APIのURLではなく空白にする
     acquisition_date: new Date().toISOString().split('T')[0],
     storage_location: '自宅',
     catalog_number: labelInfo.catno || '',
@@ -153,7 +153,7 @@ export const mapDiscogsSearchResultToRecord = (result) => {
     star: '',
     review: '',
     alphabet_artist: artist,
-    music_link: result.resourceUrl || '',
+    music_link: '', // APIのURLではなく空白にする
     acquisition_date: new Date().toISOString().split('T')[0],
     storage_location: '自宅',
     catalog_number: result.catno || '',
