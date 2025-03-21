@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 // APIベースURLを環境に応じて設定
-console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)
 const API_BASE_URL =
   process.env.REACT_APP_API_URL
     ? `${process.env.REACT_APP_API_URL}/api`
@@ -74,9 +73,6 @@ export const performAutoAuth = async () => {
     // 環境変数のトークンを取得
     const response = await axios.get(`${API_BASE_URL}/discogs/token`);
     const { accessToken } = response.data;
-
-    console.log('response', response);
-    console.log('accessToken', accessToken);
 
     if (!accessToken) {
       throw new Error('自動認証でトークンを取得できませんでした');
