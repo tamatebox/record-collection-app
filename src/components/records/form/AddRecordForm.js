@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AddRecordForm.css';
-import DiscogsSearch from './DiscogsSearch';
+import DiscogsSearch from '../../discogs/DiscogsSearch';
 
 const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) => {
   const [formData, setFormData] = useState({

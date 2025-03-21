@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDiscogsAuth } from '../contexts/DiscogsAuthContext';
+import { useDiscogsAuth } from '../../contexts/DiscogsAuthContext';
 
 // このコンポーネントは自動認証に失敗した場合のエラー表示のみを行う
 const DiscogsAuthButton = ({ className, onRetry }) => {

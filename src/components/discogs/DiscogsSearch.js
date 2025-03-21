@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { discogsSearch } from '../utils/discogsAuth';
-import { useDiscogsAuth } from '../contexts/DiscogsAuthContext';
-import { mapDiscogsSearchResultToRecord } from '../utils/discogsMapper';
+import { discogsSearch } from '../../utils/discogsAuth';
+import { useDiscogsAuth } from '../../contexts/DiscogsAuthContext';
+import { mapDiscogsSearchResultToRecord } from '../../utils/discogsMapper';
 import './DiscogsSearch.css';
 
 const DiscogsSearch = ({ onSelectRecord, onCancel }) => {

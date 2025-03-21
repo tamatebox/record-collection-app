@@ -1,5 +1,5 @@
 import React from 'react';
-import RecordStars from './RecordStars';
+import RecordStars from '../../common/RecordStars';
 import './RecordDetail.css';
 
 const RecordDetailView = ({ record }) => {
