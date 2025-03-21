@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 require('dotenv').config();
 
 // 設定モジュール
@@ -15,28 +14,44 @@ const routes = require('./routes');
 
 // アプリケーションの初期化
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.BACKEND_PORT || 3001;
+const HOST = '0.0.0.0';  // Dockerコンテナ内での接続のため
 
 // データベース接続
 const db = initializeDatabase();
 
-// ミドルウェアの設定
+// CORS設定
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3002'], // 複数のオリジンを許可
+  origin: [
+    'http://frontend:3000',
+    'http://localhost:3000',
+    'http://backend:3001',
+    'http://localhost:3001'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// 基本的なミドルウェア
 app.use(createSessionConfig());
 app.use(express.json());
 
-// ルーターの設定
+// リクエストログ
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
+// ルーター設定
 app.use('/api', routes);
 
-// エラーハンドリングミドルウェア（最後に配置）
+// エラーハンドリング
 app.use(errorHandler);
 
-// サーバーの起動
-const server = app.listen(PORT, () => {
-  console.log(`サーバーが http://localhost:${PORT} で起動しました`);
+// サーバー起動
+const server = app.listen(PORT, HOST, () => {
+  console.log(`サーバーが http://${HOST}:${PORT} で起動しました`);
 });
 
 // グレースフルシャットダウン
