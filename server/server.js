@@ -13,8 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const routes = require('./routes');
 
 // 環境変数から設定を取得
-const PORT = process.env.BACKEND_PORT || 3001;
-const HOST = process.env.BACKEND_HOST || '0.0.0.0';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 // CORS origin を FRONTEND_HOST と FRONTEND_PORT から動的に生成
 const corsOrigins = [
@@ -53,8 +52,11 @@ app.use('/api', routes);
 app.use(errorHandler);
 
 // サーバー起動
-const server = app.listen(PORT, HOST, () => {
-  console.log(`サーバーが http://${HOST}:${PORT} で起動しました`);
+const parsedUrl = new URL(REACT_APP_API_URL);
+const host = parsedUrl.hostname;
+const port = parsedUrl.port;
+const server = app.listen(port, host, () => {
+  console.log(`サーバーが ${REACT_APP_API_URL} で起動しました`);
 });
 
 // グレースフルシャットダウン

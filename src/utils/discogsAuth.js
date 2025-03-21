@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 // APIベースURLを環境に応じて設定
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? '/api' // 本番環境では同じサーバー上になるので相対パス
-  : 'http://localhost:3001/api'; // 開発環境では直接ポートを指定
+console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL
+    ? `${process.env.REACT_APP_API_URL}/api`
+    : 'http://localhost:3001/api';
 
 // 自動認証用のキー
 const DISCOGS_AUTO_CONNECTED_KEY = 'discogs_auto_connected';
@@ -48,7 +50,7 @@ export const isDiscogsAuthenticated = () => {
  */
 export const getAuthHeaders = () => {
   const token = getDiscogsToken();
-  return token ? { 'Authorization': `Bearer ${token}` } : {};
+  return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
 /**
@@ -73,8 +75,8 @@ export const performAutoAuth = async () => {
     const response = await axios.get(`${API_BASE_URL}/discogs/token`);
     const { accessToken } = response.data;
 
-    console.log("response", response)
-    console.log("accessToken", accessToken)
+    console.log('response', response);
+    console.log('accessToken', accessToken);
 
     if (!accessToken) {
       throw new Error('自動認証でトークンを取得できませんでした');
@@ -122,7 +124,7 @@ export const getUserIdentity = async () => {
   try {
     // 認証確認
     if (!isDiscogsAuthenticated()) {
-      await performAutoAuth();  // 手動認証ではなく自動認証を使用
+      await performAutoAuth(); // 手動認証ではなく自動認証を使用
     }
 
     const response = await axios.get(`${API_BASE_URL}/discogs/identity`);
@@ -146,15 +148,15 @@ export const discogsSearch = async (query, options = {}) => {
   try {
     // 認証確認
     if (!isDiscogsAuthenticated()) {
-      await performAutoAuth();  // 手動認証ではなく自動認証を使用
+      await performAutoAuth(); // 手動認証ではなく自動認証を使用
     }
 
     // 検索リクエスト
     const response = await axios.get(`${API_BASE_URL}/discogs/search`, {
       params: {
         query,
-        ...options
-      }
+        ...options,
+      },
     });
 
     return response.data;
@@ -180,7 +182,7 @@ export const getDiscogsRelease = async (id) => {
   try {
     // 認証確認
     if (!isDiscogsAuthenticated()) {
-      await performAutoAuth();  // 手動認証ではなく自動認証を使用
+      await performAutoAuth(); // 手動認証ではなく自動認証を使用
     }
 
     // リリース詳細リクエスト

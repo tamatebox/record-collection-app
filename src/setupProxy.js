@@ -1,9 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
-require('dotenv').config();
 
-const BACKEND_HOST = process.env.BACKEND_HOST || 'localhost';
-const BACKEND_PORT = process.env.BACKEND_PORT || 3001;
-const BACKEND_URL = `http://${BACKEND_HOST}:${BACKEND_PORT}`;
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 module.exports = function (app) {
   console.log('Proxy Target:', BACKEND_URL);
