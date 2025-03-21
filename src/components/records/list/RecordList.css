@@ -121,6 +121,25 @@
   flex-direction: column;
 }
 
+.record-card-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.card-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.record-card:hover .card-cover-image {
+  transform: scale(1.05);
+}
+
 .record-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -203,8 +222,8 @@
 .record-table th {
   position: relative;      /* ソートアイコンの配置のため */
   background-color: #f8f9fa;
-  padding: 12px 15px;
-  padding-right: 24px;     /* ソートアイコン用のスペース確保 */
+  padding: 12px 8px;
+  padding-right: 20px;     /* ソートアイコン用のスペース確保 */
   font-weight: 500;
   color: #555;
   border-bottom: 2px solid #eee;
@@ -213,6 +232,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 0.95rem; /* フォントサイズを少し小さく */
 }
 
 /* テーブルヘッダーのテキスト配置 */
@@ -221,19 +241,21 @@
 }
 
 .record-table th:nth-child(1),
-.record-table th:nth-child(2) {
-  text-align: left; /* アーティストとアルバム名は左揃え */
+.record-table th:nth-child(2),
+.record-table th:nth-child(3) {
+  text-align: left; /* 画像、アーティスト、アルバム名は左揃え */
 }
 
-/* テーブルの各カラムの幅を設定 - サイズ列を追加した場合 */
-.record-table th:nth-child(1) { width: 18%; } /* アーティスト */
-.record-table th:nth-child(2) { width: 22%; } /* アルバム名 */
-.record-table th:nth-child(3) { width: 8%; }  /* 発売年 */
-.record-table th:nth-child(4) { width: 12%; } /* ジャンル */
-.record-table th:nth-child(5) { width: 8%; }  /* サイズ */
-.record-table th:nth-child(6) { width: 10%; } /* 追加日 */
-.record-table th:nth-child(7) { width: 12%; } /* 評価 */
-.record-table th:nth-child(8) { width: 10%; } /* アクション */
+/* テーブルの各カラムの幅を設定 - サムネイル列を追加 */
+.record-table th:nth-child(1) { width: 6%; }  /* サムネイル */
+.record-table th:nth-child(2) { width: 18%; } /* アーティスト */
+.record-table th:nth-child(3) { width: 19%; } /* アルバム名 */
+.record-table th:nth-child(4) { width: 8%; }  /* 発売年 */
+.record-table th:nth-child(5) { width: 11%; } /* ジャンル */
+.record-table th:nth-child(6) { width: 7%; }  /* サイズ */
+.record-table th:nth-child(7) { width: 9%; } /* 追加日 */
+.record-table th:nth-child(8) { width: 15%; } /* 評価 */
+.record-table th:nth-child(9) { width: 8%; } /* アクション */
 
 .record-table th:hover {
   background-color: #edf2f7;
@@ -253,9 +275,39 @@
   text-align: center; /* デフォルトは中央揃え */
 }
 
-.record-table td:nth-child(1),
-.record-table td:nth-child(2) {
+.record-table td:nth-child(2),
+.record-table td:nth-child(3) {
   text-align: left; /* アーティストとアルバム名は左揃え */
+}
+
+/* サムネイルセルのスタイル */
+.record-thumbnail-cell {
+  padding: 4px !important;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.record-thumbnail-container {
+  width: 45px;
+  height: 45px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #f0f0f0;
+}
+
+.record-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.record-thumbnail:hover {
+  transform: scale(1.1);
 }
 
 .record-table tr {
@@ -270,13 +322,15 @@
 /* 星評価 */
 .record-rating {
   display: flex;
-  gap: 1px;
+  gap: 3px;
   justify-content: center; /* 中央揃え */
+  padding: 0 5px; /* 左右にパディングを追加 */
 }
 
 .star {
   color: #ddd;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 .star.filled {
@@ -452,14 +506,15 @@
 }
 
 /* 列幅の最小値を設定（横スクロール時のため） */
-.record-table th:nth-child(1) { min-width: 120px; } /* アーティスト */
-.record-table th:nth-child(2) { min-width: 180px; } /* アルバム名 */
-.record-table th:nth-child(3) { min-width: 70px; }  /* 発売年 */
-.record-table th:nth-child(4) { min-width: 100px; } /* ジャンル */
-.record-table th:nth-child(5) { min-width: 70px; }  /* サイズ */
-.record-table th:nth-child(6) { min-width: 90px; }  /* 追加日 */
-.record-table th:nth-child(7) { min-width: 90px; }  /* 評価 */
-.record-table th:nth-child(8) { min-width: 70px; }  /* アクション */
+.record-table th:nth-child(1) { min-width: 45px; }  /* サムネイル */
+.record-table th:nth-child(2) { min-width: 130px; } /* アーティスト */
+.record-table th:nth-child(3) { min-width: 160px; } /* アルバム名 */
+.record-table th:nth-child(4) { min-width: 70px; }  /* 発売年 */
+.record-table th:nth-child(5) { min-width: 100px; } /* ジャンル */
+.record-table th:nth-child(6) { min-width: 60px; }  /* サイズ */
+.record-table th:nth-child(7) { min-width: 80px; }  /* 追加日 */
+.record-table th:nth-child(8) { min-width: 140px; }  /* 評価 */
+.record-table th:nth-child(9) { min-width: 70px; }  /* アクション */
 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
@@ -499,13 +554,13 @@
     padding: 8px 12px;
     font-weight: 500;
   }
-  
+
   /* モバイルでのソート表示を調整 */
   .sort-controls {
     width: 100%;
     margin-top: 10px;
   }
-  
+
   .sort-tip {
     display: none; /* モバイルでは非表示 */
   }
