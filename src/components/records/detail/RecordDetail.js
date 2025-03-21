@@ -6,12 +6,12 @@ import './RecordDetail.css';
 const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedRecord, setEditedRecord] = useState({ ...record });
-  
+
   // 親コンポーネントからレコードが変更された場合に反映する
   useEffect(() => {
     setEditedRecord({ ...record });
   }, [record]);
-  
+
   // 編集フィールドの変更を処理するハンドラー
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -20,7 +20,7 @@ const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }
       [name]: type === 'checkbox' ? checked : value
     });
   };
-  
+
   // 星評価の変更を処理するハンドラー
   const handleStarChange = (rating) => {
     setEditedRecord({
@@ -28,7 +28,7 @@ const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }
       star: rating.toString()
     });
   };
-  
+
   // 編集モードの切り替え
   const toggleEditMode = () => {
     if (isEditing) {
@@ -37,7 +37,7 @@ const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }
     }
     setIsEditing(!isEditing);
   };
-  
+
   // レコードの保存
   const handleSave = async () => {
     try {
@@ -64,12 +64,12 @@ const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }
           <button className="close-button" onClick={onClose}>✕</button>
         </div>
       </div>
-      
+
       <div className="detail-content">
         {isEditing ? (
-          <RecordEdit 
-            record={editedRecord} 
-            onChange={handleChange} 
+          <RecordEdit
+            record={editedRecord}
+            onChange={handleChange}
             onStarChange={handleStarChange}
             genres={genres}
             countries={countries}

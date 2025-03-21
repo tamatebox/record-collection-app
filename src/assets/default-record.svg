@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+  <!-- 背景 -->
+  <rect width="400" height="400" fill="#f0f0f0"/>
+  
+  <!-- レコードの外枠 -->
+  <circle cx="200" cy="200" r="180" fill="#333" />
+  
+  <!-- レコードの中央の溝 -->
+  <circle cx="200" cy="200" r="160" fill="#444" />
+  
+  <!-- レーベル -->
+  <circle cx="200" cy="200" r="80" fill="#f4f4f4"/>
+  
+  <!-- テキスト -->
+  <text x="200" y="200" text-anchor="middle" alignment-baseline="middle" 
+        font-family="Arial, sans-serif" font-size="30" fill="#666" font-weight="bold">
+    No Image
+  </text>
+  
+  <!-- 放射状の線 -->
+  <g opacity="0.3">
+    <path d="M200 20 L200 380" stroke="#222" stroke-width="2"/>
+    <path d="M20 200 L380 200" stroke="#222" stroke-width="2"/>
+    <path d="M60 60 L340 340" stroke="#222" stroke-width="2"/>
+    <path d="M340 60 L60 340" stroke="#222" stroke-width="2"/>
+  </g>
+</svg>

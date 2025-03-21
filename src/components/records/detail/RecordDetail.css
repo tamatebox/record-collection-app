@@ -124,44 +124,83 @@
 .record-main-info {
   display: flex;
   align-items: center;
-  margin-bottom: 32px;
   gap: 24px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .record-visual {
-  flex-shrink: 0;
-}
-
-.record-disc {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #2c2c2c, #383838);
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
+  gap: 16px;
 }
 
-.record-disc::after {
-  content: '';
-  position: absolute;
+.record-image-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-image-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.record-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.record-detail-image:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.no-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9ecef;
+  color: #6c757d;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.image-modal {
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
-.record-label {
-  width: 35px;
-  height: 35px;
-  background-color: #fff;
-  border-radius: 50%;
-  position: relative;
+.image-modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.image-modal-content:hover {
+  transform: scale(1.02);
 }
 
 .record-titles {
@@ -275,8 +314,8 @@
 }
 
 /* ラベルスタイル - 共通 */
-.edit-field label, 
-.detail-item label, 
+.edit-field label,
+.detail-item label,
 .info-item label {
   display: block;
   margin-bottom: 6px;
@@ -286,9 +325,9 @@
 }
 
 /* 入力フィールドスタイル - 共通 */
-.edit-field input, 
-.detail-item input, 
-.detail-item select, 
+.edit-field input,
+.detail-item input,
+.detail-item select,
 .full-width-input,
 .info-item input,
 .info-item select {
@@ -305,8 +344,8 @@
 }
 
 /* フォーカス状態 - 共通 */
-.edit-field input:focus, 
-.detail-item input:focus, 
+.edit-field input:focus,
+.detail-item input:focus,
 .detail-item select:focus,
 .review-textarea:focus,
 .full-width-input:focus,
@@ -417,7 +456,7 @@ input, select, textarea {
 }
 
 /* セクションに余白を追加 */
-.detail-section:not(:last-child), 
+.detail-section:not(:last-child),
 .info-section:not(:last-child) {
   margin-bottom: 24px;
 }
@@ -427,18 +466,18 @@ input, select, textarea {
   .detail-columns {
     flex-direction: column;
   }
-  
+
   .detail-grid,
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .record-main-info {
     flex-direction: column;
     text-align: center;
     gap: 16px;
   }
-  
+
   .rating {
     justify-content: center;
   }
@@ -455,12 +494,12 @@ input, select, textarea {
   .detail-content {
     padding: 16px;
   }
-  
+
   .checkbox-item {
     grid-column: 1;
   }
-  
-  .review-section, 
+
+  .review-section,
   .music-link-section {
     grid-column: 1;
   }

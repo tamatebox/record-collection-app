@@ -35,3 +35,7 @@ build/
 # その他
 .npm
 .node_repl_history
+
+# 画像
+*.jpeg
+*.jpg
