@@ -1,4 +1,24 @@
-:root {
+/* チェックボックスグループのスタイル */
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}:root {
   --primary-color: #3498db;
   --secondary-color: #2ecc71;
   --text-color: #333;
@@ -71,6 +91,40 @@ textarea {
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+}
+
+/* セレクトボックスのスタイル */
+select {
+  padding: 12px;
+  padding-right: 35px;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333333' d='M6 8.825l-4.588-5.5h9.176z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: auto;
+  position: relative;
+}
+
+/* セレクトボックスのオプションスタイル */
+select option {
+  padding: 10px 5px;
+  line-height: 20px;
+  white-space: normal;
+  min-height: 20px;
+  font-size: 1rem;
+}
+
+
+
+select::-ms-expand {
+  display: none;
 }
 
 input[type="text"]:focus,
@@ -147,4 +201,26 @@ textarea {
   .form-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* チェックボックスグループのスタイル */
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
 }

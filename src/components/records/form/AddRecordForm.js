@@ -20,10 +20,10 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
     storage_location: '自宅',
     catalog_number: ''
   });
-  
+
   // Discogsから情報が読み込まれたかを記録
   const [isDiscogsDataLoaded, setIsDiscogsDataLoaded] = useState(false);
-  
+
   // Discogsからレコードの選択があった場合にフォームに反映
   const handleDiscogsSelect = (discogsRecord) => {
     setFormData({
@@ -32,7 +32,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
       // compilationはbool型に変換
       compilation: Boolean(discogsRecord.compilation)
     });
-    
+
     // Discogsからデータが読み込まれたことを記録
     setIsDiscogsDataLoaded(true);
   };
@@ -50,24 +50,30 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
     onAddRecord(formData);
   };
 
+
+
   return (
     <div className="add-record-form">
       <div className="form-header">
         <h2>新しいレコードを追加</h2>
         <button className="close-button" onClick={onCancel}>✕</button>
       </div>
-      
+
       {/* Discogs検索コンポーネント */}
       <DiscogsSearch onSelectRecord={handleDiscogsSelect} />
-      
+
       {/* Discogsからデータが読み込まれた場合の通知 */}
       {isDiscogsDataLoaded && (
         <div className="discogs-data-loaded-notification">
           <i className="check-icon">✓</i> Discogsからレコード情報を取得しました。必要に応じて編集してください。
         </div>
       )}
-      
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} onKeyDown={(e) => {
+        if (e.key === 'Enter' && e.target.type !== 'textarea') {
+          e.preventDefault();
+        }
+      }}>
         <div className="form-grid">
           <div className="form-group">
             <label htmlFor="artist">アーティスト名</label>
@@ -80,7 +86,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="album_name">アルバム名</label>
             <input
@@ -92,7 +98,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="release_year">発売年</label>
             <input
@@ -104,7 +110,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               placeholder="例: 1985"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="genre">ジャンル</label>
             <select
@@ -112,6 +118,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               name="genre"
               value={formData.genre}
               onChange={handleChange}
+
             >
               <option value="">選択してください</option>
               {genres.map(genre => (
@@ -119,7 +126,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               ))}
             </select>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="country">国</label>
             <select
@@ -127,6 +134,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               name="country"
               value={formData.country}
               onChange={handleChange}
+
             >
               <option value="">選択してください</option>
               {countries.map(country => (
@@ -134,7 +142,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               ))}
             </select>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="size">サイズ</label>
             <select
@@ -142,13 +150,14 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               name="size"
               value={formData.size}
               onChange={handleChange}
+
             >
               <option value="7">7"</option>
               <option value="12">12"</option>
               <option value="10">10"</option>
             </select>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="label">レーベル</label>
             <input
@@ -159,7 +168,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="catalog_number">カタログ番号</label>
             <input
@@ -170,7 +179,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="alphabet_artist">アーティスト名(英字)</label>
             <input
@@ -181,7 +190,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="acquisition_date">取得日</label>
             <input
@@ -192,7 +201,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="storage_location">保管場所</label>
             <input
@@ -203,7 +212,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="star">評価（1-5）</label>
             <select
@@ -211,6 +220,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               name="star"
               value={formData.star}
               onChange={handleChange}
+
             >
               <option value="">未評価</option>
               <option value="1">1</option>
@@ -220,20 +230,21 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
               <option value="5">5</option>
             </select>
           </div>
-          
-          <div className="form-group checkbox-group">
-            <label>
-              <input
-                type="checkbox"
-                name="compilation"
-                checked={formData.compilation}
-                onChange={handleChange}
-              />
-              コンピレーション
-            </label>
-          </div>
+
         </div>
-        
+
+        <div className="form-group checkbox-group" style={{ marginBottom: '20px' }}>
+          <label>
+            <input
+              type="checkbox"
+              name="compilation"
+              checked={formData.compilation}
+              onChange={handleChange}
+            />
+            コンピレーション
+          </label>
+        </div>
+
         <div className="form-group">
           <label htmlFor="music_link">試聴リンク</label>
           <input
@@ -245,7 +256,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
             placeholder="例: https://open.spotify.com/album/..."
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="review">レビュー</label>
           <textarea
@@ -256,7 +267,7 @@ const AddRecordForm = ({ onAddRecord, onCancel, genres = [], countries = [] }) =
             rows={4}
           />
         </div>
-        
+
         <div className="form-actions">
           <button type="button" className="cancel-button" onClick={onCancel}>
             キャンセル

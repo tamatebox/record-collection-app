@@ -9,6 +9,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
   const { isAuthenticated } = useDiscogsAuth();
 
   const handleSearch = async () => {
@@ -20,7 +21,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
     try {
       setLoading(true);
       setError(null);
-
+      setHasSearched(true);  // 検索実行フラグを立てる
       // 検索リクエスト
       const response = await discogsSearch(query);
       setSearchResults(response.results || []);
@@ -152,7 +153,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
                   </div>
                 ))}
               </div>
-            ) : !loading && !error && query && (
+            ) : !loading && !error && hasSearched && (
               <div className="no-results">
                 検索結果がありません
               </div>
