@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
         id, artist, album_name, release_year, genre, country, size,
         label, compilation, star, review, alphabet_artist,
         music_link, acquisition_date, storage_location, catalog_number,
-        discogs_url, thumbnail_image, full_image
+        discogs_id, thumbnail_image, full_image
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
@@ -69,10 +69,10 @@ router.post('/', (req, res) => {
       record.acquisition_date,
       record.storage_location,
       record.catalog_number,
-      record.discogs_url,
+      record.discogs_id,
       record.thumbnail_image,
       record.full_image,
-      function(err) {
+      function (err) {
         if (err) {
           console.error('レコードの追加中にエラーが発生しました:', err);
           return res.status(500).json({ error: 'レコードの追加に失敗しました' });
@@ -137,7 +137,7 @@ router.put('/:id', (req, res) => {
     record.catalog_number,
     record.discogs_id,
     id,
-    function(err) {
+    function (err) {
       if (err) {
         console.error('レコードの更新中にエラーが発生しました:', err);
         return res.status(500).json({ error: 'レコードの更新に失敗しました' });
@@ -165,7 +165,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
 
-  db.run('DELETE FROM records WHERE id = ?', id, function(err) {
+  db.run('DELETE FROM records WHERE id = ?', id, function (err) {
     if (err) {
       console.error('レコードの削除中にエラーが発生しました:', err);
       return res.status(500).json({ error: 'レコードの削除に失敗しました' });
