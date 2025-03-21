@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 // APIベースURLを環境に応じて設定
-const API_BASE_URL =
-  process.env.REACT_APP_API_URL
-    ? `${process.env.REACT_APP_API_URL}/api`
-    : 'http://localhost:3001/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL
+  ? `${process.env.REACT_APP_API_URL}/api`
+  : 'http://localhost:3001/api';
 
 // 自動認証用のキー
 const DISCOGS_AUTO_CONNECTED_KEY = 'discogs_auto_connected';

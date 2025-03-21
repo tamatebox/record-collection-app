@@ -48,8 +48,8 @@ router.post('/', (req, res) => {
         id, artist, album_name, release_year, genre, country, size,
         label, compilation, star, review, alphabet_artist,
         music_link, acquisition_date, storage_location, catalog_number,
-        discogs_id, thumbnail_image, full_image
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        discogs_id
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(

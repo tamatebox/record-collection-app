@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 // デフォルトのAPIベースURL
-const API_BASE_URL =
-  process.env.REACT_APP_API_URL
-    ? `${process.env.REACT_APP_API_URL}/api`
-    : 'http://localhost:3001/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL
+  ? `${process.env.REACT_APP_API_URL}/api`
+  : 'http://localhost:3001/api';
 
 // Axiosインスタンスの作成
 const api = axios.create({
