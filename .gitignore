@@ -1,0 +1,37 @@
+# 依存関係
+node_modules/
+
+# 環境変数ファイル
+.env
+*.env
+!.env.example
+
+# データベース
+*.db
+!db/.gitkeep
+
+# ログファイル
+logs/
+*.log
+
+# 一時ファイル
+*.tmp
+*.bak
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# IDEとエディタ関連
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ビルド成果物
+dist/
+build/
+
+# その他
+.npm
+.node_repl_history
