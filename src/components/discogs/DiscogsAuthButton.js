@@ -21,24 +21,29 @@ const DiscogsAuthButton = ({ className, onRetry }) => {
 
   return (
     <div className={className || 'discogs-auth-error'}>
-      <div className="error-container" style={{
-        padding: '15px',
-        backgroundColor: '#fff8f8',
-        border: '1px solid #ffcdd2',
-        borderRadius: '4px',
-        margin: '10px 0',
-        color: '#d32f2f'
-      }}>
+      <div
+        className="error-container"
+        style={{
+          padding: '15px',
+          backgroundColor: '#fff8f8',
+          border: '1px solid #ffcdd2',
+          borderRadius: '4px',
+          margin: '10px 0',
+          color: '#d32f2f',
+        }}
+      >
         <h3 style={{ margin: '0 0 10px 0' }}>Discogs接続エラー</h3>
         <p>環境変数に正しいトークンが設定されていない可能性があります。</p>
         <ol style={{ marginLeft: '20px', paddingLeft: '0' }}>
           <li>Discogsアカウントにログインしてください。</li>
           <li>設定 > 開発者に移動してください。</li>
           <li>"Generate new token"ボタンをクリックしてトークンを生成してください。</li>
-          <li>サーバーの`.env`ファイルに`DISCOGS_PERSONAL_ACCESS_TOKEN=生成したトークン`を設定してください。</li>
+          <li>
+            サーバーの`.env`ファイルに`DISCOGS_PERSONAL_ACCESS_TOKEN=生成したトークン`を設定してください。
+          </li>
           <li>サーバーを再起動してください。</li>
         </ol>
-        <button 
+        <button
           onClick={handleRetry}
           className="retry-button"
           style={{
@@ -48,7 +53,7 @@ const DiscogsAuthButton = ({ className, onRetry }) => {
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
-            marginTop: '10px'
+            marginTop: '10px',
           }}
           disabled={loading}
         >

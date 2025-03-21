@@ -30,7 +30,7 @@ const RecordDetailView = ({ record }) => {
       return date.toLocaleDateString('ja-JP', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
       });
     } catch (e) {
       return dateString;
@@ -55,9 +55,7 @@ const RecordDetailView = ({ record }) => {
         <div className="record-titles">
           <h3 className="album-title">{record.album_name}</h3>
           <h4 className="artist-name">{record.artist}</h4>
-          {record.alphabet_artist && (
-            <p className="alphabet-artist">{record.alphabet_artist}</p>
-          )}
+          {record.alphabet_artist && <p className="alphabet-artist">{record.alphabet_artist}</p>}
           <RecordStars rating={record.star} readOnly />
         </div>
       </div>
@@ -151,9 +149,17 @@ const RecordDetailView = ({ record }) => {
           {record.music_link && (
             <div className="detail-section">
               <h4 className="section-title">試聴リンク</h4>
-              <a href={record.music_link} target="_blank" rel="noopener noreferrer" className="music-link">
-                {record.music_link.includes('spotify') ? 'Spotifyで聴く' :
-                 record.music_link.includes('youtube') ? 'YouTubeで見る' : '試聴する'}
+              <a
+                href={record.music_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="music-link"
+              >
+                {record.music_link.includes('spotify')
+                  ? 'Spotifyで聴く'
+                  : record.music_link.includes('youtube')
+                    ? 'YouTubeで見る'
+                    : '試聴する'}
               </a>
             </div>
           )}

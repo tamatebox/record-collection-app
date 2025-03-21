@@ -10,20 +10,20 @@ const FilterModal = ({
   genres = [],
   countries = [],
   decades = [],
-  sizes = []
+  sizes = [],
 }) => {
   // モーダル内でのフィルター状態を管理
-  const [modalFilters, setModalFilters] = useState({...filters});
+  const [modalFilters, setModalFilters] = useState({ ...filters });
 
   // 親コンポーネントのフィルターが変更されたらモーダル内も更新
   useEffect(() => {
-    setModalFilters({...filters});
+    setModalFilters({ ...filters });
   }, [filters]);
 
   const handleFilterChange = (filterName, value) => {
     setModalFilters({
       ...modalFilters,
-      [filterName]: value
+      [filterName]: value,
     });
   };
 
@@ -47,7 +47,9 @@ const FilterModal = ({
       <div className="filter-modal-content">
         <div className="filter-modal-header">
           <h2>フィルター設定</h2>
-          <button className="modal-close-btn" onClick={onClose}>✕</button>
+          <button className="modal-close-btn" onClick={onClose}>
+            ✕
+          </button>
         </div>
 
         <div className="filter-modal-body">
@@ -65,7 +67,7 @@ const FilterModal = ({
           <div className="filter-section">
             <h3>ジャンル</h3>
             <div className="checkbox-grid">
-              {genres.map(genre => (
+              {genres.map((genre) => (
                 <label key={genre} className="checkbox-item">
                   <input
                     type="checkbox"
@@ -73,7 +75,7 @@ const FilterModal = ({
                     onChange={() => {
                       const current = modalFilters.genres || [];
                       const newValue = current.includes(genre)
-                        ? current.filter(g => g !== genre)
+                        ? current.filter((g) => g !== genre)
                         : [...current, genre];
                       handleFilterChange('genres', newValue);
                     }}
@@ -87,7 +89,7 @@ const FilterModal = ({
           <div className="filter-section">
             <h3>年代</h3>
             <div className="checkbox-grid">
-              {decades.map(decade => (
+              {decades.map((decade) => (
                 <label key={decade} className="checkbox-item">
                   <input
                     type="checkbox"
@@ -95,7 +97,7 @@ const FilterModal = ({
                     onChange={() => {
                       const current = modalFilters.decades || [];
                       const newValue = current.includes(decade)
-                        ? current.filter(d => d !== decade)
+                        ? current.filter((d) => d !== decade)
                         : [...current, decade];
                       handleFilterChange('decades', newValue);
                     }}
@@ -109,7 +111,7 @@ const FilterModal = ({
           <div className="filter-section">
             <h3>国</h3>
             <div className="checkbox-grid">
-              {countries.map(country => (
+              {countries.map((country) => (
                 <label key={country} className="checkbox-item">
                   <input
                     type="checkbox"
@@ -117,7 +119,7 @@ const FilterModal = ({
                     onChange={() => {
                       const current = modalFilters.countries || [];
                       const newValue = current.includes(country)
-                        ? current.filter(c => c !== country)
+                        ? current.filter((c) => c !== country)
                         : [...current, country];
                       handleFilterChange('countries', newValue);
                     }}
@@ -131,7 +133,7 @@ const FilterModal = ({
           <div className="filter-section">
             <h3>サイズ</h3>
             <div className="checkbox-grid">
-              {sizes.map(size => (
+              {sizes.map((size) => (
                 <label key={size} className="checkbox-item">
                   <input
                     type="checkbox"
@@ -139,7 +141,7 @@ const FilterModal = ({
                     onChange={() => {
                       const current = modalFilters.sizes || [];
                       const newValue = current.includes(size)
-                        ? current.filter(s => s !== size)
+                        ? current.filter((s) => s !== size)
                         : [...current, size];
                       handleFilterChange('sizes', newValue);
                     }}
@@ -154,20 +156,19 @@ const FilterModal = ({
         <div className="filter-modal-footer">
           <button
             className="modal-reset-btn"
-            onClick={() => setModalFilters({
-              search: '',
-              genres: [],
-              decades: [],
-              countries: [],
-              sizes: []
-            })}
+            onClick={() =>
+              setModalFilters({
+                search: '',
+                genres: [],
+                decades: [],
+                countries: [],
+                sizes: [],
+              })
+            }
           >
             リセット
           </button>
-          <button
-            className="modal-apply-btn"
-            onClick={applyFilters}
-          >
+          <button className="modal-apply-btn" onClick={applyFilters}>
             適用
           </button>
         </div>
@@ -190,10 +191,10 @@ const FilterDropdown = ({ buttonText, children }) => {
     }
 
     // クリックイベントリスナーを追加
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       // クリーンアップ
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownRef]);
 
@@ -206,9 +207,7 @@ const FilterDropdown = ({ buttonText, children }) => {
       >
         {buttonText}
       </button>
-      <div className={`filter-dropdown-content ${isOpen ? 'show' : ''}`}>
-        {children}
-      </div>
+      <div className={`filter-dropdown-content ${isOpen ? 'show' : ''}`}>{children}</div>
     </div>
   );
 };
@@ -226,14 +225,14 @@ const MultiSelect = ({ options, value, onChange, placeholder }) => {
       </div>
       <div className="multi-select-dropdown">
         <div className="multi-select-options">
-          {options.map(option => (
+          {options.map((option) => (
             <label key={option} className="multi-select-option">
               <input
                 type="checkbox"
                 checked={value.includes(option)}
                 onChange={() => {
                   const newValue = value.includes(option)
-                    ? value.filter(v => v !== option)
+                    ? value.filter((v) => v !== option)
                     : [...value, option];
                   onChange(newValue);
                 }}
@@ -253,14 +252,14 @@ const RecordFilter = ({
   genres = [],
   countries = [],
   decades = [],
-  sizes = []
+  sizes = [],
 }) => {
   const [localFilters, setLocalFilters] = useState({
     search: filters.search || '',
     genres: filters.genres || [],
     decades: filters.decades || [],
     countries: filters.countries || [],
-    sizes: filters.sizes || []
+    sizes: filters.sizes || [],
   });
 
   // フィルターモーダルの表示状態
@@ -281,7 +280,7 @@ const RecordFilter = ({
   const handleFilterChange = (filterName, value) => {
     const newFilters = {
       ...localFilters,
-      [filterName]: value
+      [filterName]: value,
     };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);
@@ -290,7 +289,7 @@ const RecordFilter = ({
   const removeFilter = (filterName, value) => {
     const newFilters = {
       ...localFilters,
-      [filterName]: localFilters[filterName].filter(item => item !== value)
+      [filterName]: localFilters[filterName].filter((item) => item !== value),
     };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);
@@ -302,17 +301,17 @@ const RecordFilter = ({
       genres: [],
       decades: [],
       countries: [],
-      sizes: []
+      sizes: [],
     };
     setLocalFilters(clearedFilters);
     onFilterChange(clearedFilters);
   };
 
   const activeFilters = [
-    ...localFilters.genres.map(genre => ({ type: 'ジャンル', value: genre })),
-    ...localFilters.decades.map(decade => ({ type: '年代', value: `${decade}年代` })),
-    ...localFilters.countries.map(country => ({ type: '国', value: country })),
-    ...localFilters.sizes.map(size => ({ type: 'サイズ', value: `${size}"` }))
+    ...localFilters.genres.map((genre) => ({ type: 'ジャンル', value: genre })),
+    ...localFilters.decades.map((decade) => ({ type: '年代', value: `${decade}年代` })),
+    ...localFilters.countries.map((country) => ({ type: '国', value: country })),
+    ...localFilters.sizes.map((size) => ({ type: 'サイズ', value: `${size}"` })),
   ];
 
   // フィルターモーダルからのフィルター適用処理
@@ -352,9 +351,7 @@ const RecordFilter = ({
             onClick={() => setIsModalOpen(true)}
           >
             フィルター
-            {activeFiltersCount > 0 && (
-              <span className="filter-count">{activeFiltersCount}</span>
-            )}
+            {activeFiltersCount > 0 && <span className="filter-count">{activeFiltersCount}</span>}
           </button>
         </div>
       ) : (
@@ -369,10 +366,7 @@ const RecordFilter = ({
               className="search-input"
             />
             {localFilters.search && (
-              <button
-                className="clear-search-btn"
-                onClick={() => handleFilterChange('search', '')}
-              >
+              <button className="clear-search-btn" onClick={() => handleFilterChange('search', '')}>
                 ✕
               </button>
             )}
@@ -380,20 +374,24 @@ const RecordFilter = ({
 
           <div className="filter-buttons">
             {/* 新しいFilterDropdownコンポーネントを使用 */}
-            <FilterDropdown buttonText={
-              <>
-                ジャンル
-                {localFilters.genres.length > 0 && <span className="filter-badge">{localFilters.genres.length}</span>}
-              </>
-            }>
-              {genres.map(genre => (
+            <FilterDropdown
+              buttonText={
+                <>
+                  ジャンル
+                  {localFilters.genres.length > 0 && (
+                    <span className="filter-badge">{localFilters.genres.length}</span>
+                  )}
+                </>
+              }
+            >
+              {genres.map((genre) => (
                 <label key={genre} className="filter-option">
                   <input
                     type="checkbox"
                     checked={localFilters.genres.includes(genre)}
                     onChange={() => {
                       const newGenres = localFilters.genres.includes(genre)
-                        ? localFilters.genres.filter(g => g !== genre)
+                        ? localFilters.genres.filter((g) => g !== genre)
                         : [...localFilters.genres, genre];
                       handleFilterChange('genres', newGenres);
                     }}
@@ -403,20 +401,24 @@ const RecordFilter = ({
               ))}
             </FilterDropdown>
 
-            <FilterDropdown buttonText={
-              <>
-                年代
-                {localFilters.decades.length > 0 && <span className="filter-badge">{localFilters.decades.length}</span>}
-              </>
-            }>
-              {decades.map(decade => (
+            <FilterDropdown
+              buttonText={
+                <>
+                  年代
+                  {localFilters.decades.length > 0 && (
+                    <span className="filter-badge">{localFilters.decades.length}</span>
+                  )}
+                </>
+              }
+            >
+              {decades.map((decade) => (
                 <label key={decade} className="filter-option">
                   <input
                     type="checkbox"
                     checked={localFilters.decades.includes(decade)}
                     onChange={() => {
                       const newDecades = localFilters.decades.includes(decade)
-                        ? localFilters.decades.filter(d => d !== decade)
+                        ? localFilters.decades.filter((d) => d !== decade)
                         : [...localFilters.decades, decade];
                       handleFilterChange('decades', newDecades);
                     }}
@@ -426,25 +428,29 @@ const RecordFilter = ({
               ))}
             </FilterDropdown>
 
-            <FilterDropdown buttonText={
-              <>
-                その他のフィルター
-                {(localFilters.countries.length > 0 || localFilters.sizes.length > 0) && 
-                  <span className="filter-badge">{localFilters.countries.length + localFilters.sizes.length}</span>
-                }
-              </>
-            }>
+            <FilterDropdown
+              buttonText={
+                <>
+                  その他のフィルター
+                  {(localFilters.countries.length > 0 || localFilters.sizes.length > 0) && (
+                    <span className="filter-badge">
+                      {localFilters.countries.length + localFilters.sizes.length}
+                    </span>
+                  )}
+                </>
+              }
+            >
               <div className="filter-dropdown-section">
                 <h4>国</h4>
                 <div className="filter-option-grid">
-                  {countries.map(country => (
+                  {countries.map((country) => (
                     <label key={country} className="filter-option">
                       <input
                         type="checkbox"
                         checked={localFilters.countries.includes(country)}
                         onChange={() => {
                           const newCountries = localFilters.countries.includes(country)
-                            ? localFilters.countries.filter(c => c !== country)
+                            ? localFilters.countries.filter((c) => c !== country)
                             : [...localFilters.countries, country];
                           handleFilterChange('countries', newCountries);
                         }}
@@ -458,14 +464,14 @@ const RecordFilter = ({
               <div className="filter-dropdown-section">
                 <h4>サイズ</h4>
                 <div className="filter-option-grid">
-                  {sizes.map(size => (
+                  {sizes.map((size) => (
                     <label key={size} className="filter-option">
                       <input
                         type="checkbox"
                         checked={localFilters.sizes.includes(size)}
                         onChange={() => {
                           const newSizes = localFilters.sizes.includes(size)
-                            ? localFilters.sizes.filter(s => s !== size)
+                            ? localFilters.sizes.filter((s) => s !== size)
                             : [...localFilters.sizes, size];
                           handleFilterChange('sizes', newSizes);
                         }}
@@ -476,7 +482,7 @@ const RecordFilter = ({
                 </div>
               </div>
             </FilterDropdown>
-            
+
             {/* すべてクリアボタンはここから除去 */}
           </div>
         </div>
@@ -487,10 +493,7 @@ const RecordFilter = ({
         <div className="active-filters-container">
           <div className="active-filters-header">
             <span className="active-filters-title">適用中のフィルター</span>
-            <button
-              className="clear-all-btn"
-              onClick={clearAllFilters}
-            >
+            <button className="clear-all-btn" onClick={clearAllFilters}>
               すべてクリア
             </button>
           </div>
@@ -511,9 +514,13 @@ const RecordFilter = ({
                     }
 
                     removeFilter(
-                      filter.type === 'ジャンル' ? 'genres' :
-                      filter.type === '年代' ? 'decades' :
-                      filter.type === '国' ? 'countries' : 'sizes',
+                      filter.type === 'ジャンル'
+                        ? 'genres'
+                        : filter.type === '年代'
+                          ? 'decades'
+                          : filter.type === '国'
+                            ? 'countries'
+                            : 'sizes',
                       filterValue
                     );
                   }}

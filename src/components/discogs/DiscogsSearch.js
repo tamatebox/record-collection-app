@@ -21,7 +21,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
     try {
       setLoading(true);
       setError(null);
-      setHasSearched(true);  // 検索実行フラグを立てる
+      setHasSearched(true); // 検索実行フラグを立てる
       // 検索リクエスト
       const response = await discogsSearch(query);
       setSearchResults(response.results || []);
@@ -64,11 +64,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
       <div className="search-header">
         <h3>Discogsでレコードを検索</h3>
         {onCancel && (
-          <button
-            className="close-button"
-            onClick={onCancel}
-            aria-label="閉じる"
-          >
+          <button className="close-button" onClick={onCancel} aria-label="閉じる">
             ×
           </button>
         )}
@@ -100,11 +96,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
             </button>
           </div>
 
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
+          {error && <div className="error-message">{error}</div>}
 
           <div className="search-results">
             {searchResults.length > 0 ? (
@@ -131,9 +123,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
                     <div className="discogs-result-info">
                       <div className="discogs-result-title">{result.title}</div>
                       <div className="discogs-result-details">
-                        {result.year && (
-                          <span className="discogs-result-year">{result.year}</span>
-                        )}
+                        {result.year && <span className="discogs-result-year">{result.year}</span>}
                         {result.country && (
                           <span className="discogs-result-country">{result.country}</span>
                         )}
@@ -145,7 +135,9 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
                         )}
                         {result.format && (
                           <span className="discogs-result-format">
-                            {Array.isArray(result.format) ? result.format.join(', ') : result.format}
+                            {Array.isArray(result.format)
+                              ? result.format.join(', ')
+                              : result.format}
                           </span>
                         )}
                       </div>
@@ -153,10 +145,10 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
                   </div>
                 ))}
               </div>
-            ) : !loading && !error && hasSearched && (
-              <div className="no-results">
-                検索結果がありません
-              </div>
+            ) : (
+              !loading &&
+              !error &&
+              hasSearched && <div className="no-results">検索結果がありません</div>
             )}
           </div>
         </div>

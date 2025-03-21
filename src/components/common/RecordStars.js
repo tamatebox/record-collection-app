@@ -9,7 +9,9 @@ const RecordStars = ({ rating, onChange, readOnly = false }) => {
     return (
       <div className="rating">
         {[...Array(5)].map((_, i) => (
-          <span key={i} className={i < numRating ? 'star filled' : 'star'}>★</span>
+          <span key={i} className={i < numRating ? 'star filled' : 'star'}>
+            ★
+          </span>
         ))}
       </div>
     );
@@ -21,7 +23,7 @@ const RecordStars = ({ rating, onChange, readOnly = false }) => {
       {[...Array(5)].map((_, i) => (
         <span
           key={i}
-          className={(i + 1) <= numRating ? 'star filled' : 'star'}
+          className={i + 1 <= numRating ? 'star filled' : 'star'}
           onClick={() => onChange && onChange(i + 1)}
         >
           ★

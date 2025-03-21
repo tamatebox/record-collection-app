@@ -87,7 +87,7 @@ export const Pagination = ({
   totalPages,
   handlePageChange,
   recordsCount,
-  recordsPerPage
+  recordsPerPage,
 }) => {
   // ページが1つだけの場合はページネーションを表示しない
   if (totalPages <= 1) return null;
@@ -130,7 +130,9 @@ export const Pagination = ({
   if (startPage > 1) {
     if (startPage > 2) {
       pageNumbers.push(
-        <span key="start-ellipsis" className="page-ellipsis" aria-hidden="true">...</span>
+        <span key="start-ellipsis" className="page-ellipsis" aria-hidden="true">
+          ...
+        </span>
       );
     } else {
       pageNumbers.push(
@@ -139,7 +141,7 @@ export const Pagination = ({
           onClick={() => handlePageChange(1)}
           className={`page-button ${currentPage === 1 ? 'active' : ''}`}
           aria-label="1ページ目"
-          aria-current={currentPage === 1 ? "page" : null}
+          aria-current={currentPage === 1 ? 'page' : null}
         >
           1
         </button>
@@ -155,7 +157,7 @@ export const Pagination = ({
         onClick={() => handlePageChange(i)}
         className={`page-button ${currentPage === i ? 'active' : ''}`}
         aria-label={`${i}ページ目`}
-        aria-current={currentPage === i ? "page" : null}
+        aria-current={currentPage === i ? 'page' : null}
       >
         {i}
       </button>
@@ -166,7 +168,9 @@ export const Pagination = ({
   if (endPage < totalPages) {
     if (endPage < totalPages - 1) {
       pageNumbers.push(
-        <span key="end-ellipsis" className="page-ellipsis" aria-hidden="true">...</span>
+        <span key="end-ellipsis" className="page-ellipsis" aria-hidden="true">
+          ...
+        </span>
       );
     } else {
       pageNumbers.push(
@@ -175,7 +179,7 @@ export const Pagination = ({
           onClick={() => handlePageChange(totalPages)}
           className={`page-button ${currentPage === totalPages ? 'active' : ''}`}
           aria-label={`${totalPages}ページ目（最後）`}
-          aria-current={currentPage === totalPages ? "page" : null}
+          aria-current={currentPage === totalPages ? 'page' : null}
         >
           {totalPages}
         </button>
@@ -217,7 +221,8 @@ export const Pagination = ({
       <div className="page-info">
         {recordsCount > 0 ? (
           <span>
-            {(currentPage - 1) * recordsPerPage + 1} - {Math.min(currentPage * recordsPerPage, recordsCount)} / {recordsCount}件
+            {(currentPage - 1) * recordsPerPage + 1} -{' '}
+            {Math.min(currentPage * recordsPerPage, recordsCount)} / {recordsCount}件
           </span>
         ) : (
           <span>0件</span>
@@ -229,7 +234,5 @@ export const Pagination = ({
 
 // レコードが存在しない場合のメッセージ
 export const NoRecordsMessage = () => (
-  <div className="no-records">
-    条件に一致するレコードがありません
-  </div>
+  <div className="no-records">条件に一致するレコードがありません</div>
 );

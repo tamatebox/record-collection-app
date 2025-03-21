@@ -5,21 +5,15 @@ import DefaultRecordImage from '../../../assets/default-record.svg';
 /**
  * レコードのテーブル表示コンポーネント
  */
-const RecordTable = ({
-  records,
-  onRecordSelect,
-  onRecordDelete,
-  onSort,
-  sortConfig
-}) => {
+const RecordTable = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfig }) => {
   // 画像エラー状態を管理するステート
   const [imageErrors, setImageErrors] = useState({});
 
   // 画像読み込みエラーを処理するハンドラー
   const handleImageError = (recordId) => {
-    setImageErrors(prev => ({
+    setImageErrors((prev) => ({
       ...prev,
-      [recordId]: true
+      [recordId]: true,
     }));
   };
 
@@ -84,13 +78,11 @@ const RecordTable = ({
             >
               評価 {getSortIcon('star', sortConfig)}
             </th>
-            <th role="columnheader">
-              {/* アクションカラム - テキストなし */}
-            </th>
+            <th role="columnheader">{/* アクションカラム - テキストなし */}</th>
           </tr>
         </thead>
         <tbody>
-          {records.map(record => {
+          {records.map((record) => {
             // サムネイル画像パスを生成
             const thumbnailPath = `/images/record-covers/thumbnails/record_${record.id}_thumbnail.jpeg`;
             const hasImageError = imageErrors[record.id];
@@ -117,12 +109,24 @@ const RecordTable = ({
                     />
                   </div>
                 </td>
-                <td role="cell" title={record.artist}>{record.artist}</td>
-                <td role="cell" title={record.album_name}>{record.album_name}</td>
-                <td role="cell" title={record.release_year}>{record.release_year}</td>
-                <td role="cell" title={record.genre}>{record.genre}</td>
-                <td role="cell" title={`${record.size}インチ`}>{record.size ? `${record.size}"` : ''}</td>
-                <td role="cell" title={formatDate(record.acquisition_date)}>{formatDate(record.acquisition_date)}</td>
+                <td role="cell" title={record.artist}>
+                  {record.artist}
+                </td>
+                <td role="cell" title={record.album_name}>
+                  {record.album_name}
+                </td>
+                <td role="cell" title={record.release_year}>
+                  {record.release_year}
+                </td>
+                <td role="cell" title={record.genre}>
+                  {record.genre}
+                </td>
+                <td role="cell" title={`${record.size}インチ`}>
+                  {record.size ? `${record.size}"` : ''}
+                </td>
+                <td role="cell" title={formatDate(record.acquisition_date)}>
+                  {formatDate(record.acquisition_date)}
+                </td>
                 <td role="cell">{renderStars(record.star)}</td>
                 <td role="cell" className="action-buttons">
                   <button

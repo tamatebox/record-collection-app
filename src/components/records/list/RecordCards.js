@@ -5,19 +5,15 @@ import DefaultRecordImage from '../../../assets/default-record.svg';
 /**
  * レコードのカード表示コンポーネント
  */
-const RecordCards = ({
-  records,
-  onRecordSelect,
-  onRecordDelete
-}) => {
+const RecordCards = ({ records, onRecordSelect, onRecordDelete }) => {
   // 画像エラー状態を管理するステート
   const [imageErrors, setImageErrors] = useState({});
 
   // 画像読み込みエラーを処理するハンドラー
   const handleImageError = (recordId) => {
-    setImageErrors(prev => ({
+    setImageErrors((prev) => ({
       ...prev,
-      [recordId]: true
+      [recordId]: true,
     }));
   };
 
@@ -27,7 +23,7 @@ const RecordCards = ({
 
   return (
     <div className="record-cards">
-      {records.map(record => {
+      {records.map((record) => {
         // サムネイル画像パスを生成
         const thumbnailPath = `/images/record-covers/full-size/record_${record.id}_full.jpeg`;
         const hasImageError = imageErrors[record.id];
@@ -66,19 +62,21 @@ const RecordCards = ({
               <div className="record-info">
                 <div className="record-detail">
                   <span className="record-year">{record.release_year || '不明'}</span>
-                  <span className="record-separator" aria-hidden="true">·</span>
+                  <span className="record-separator" aria-hidden="true">
+                    ·
+                  </span>
                   <span className="record-genre">{record.genre || '不明'}</span>
                 </div>
 
                 <div className="record-detail">
                   <span className="record-country">{record.country || '不明'}</span>
-                  <span className="record-separator" aria-hidden="true">·</span>
+                  <span className="record-separator" aria-hidden="true">
+                    ·
+                  </span>
                   <span className="record-size">{record.size}"</span>
                 </div>
 
-                <div className="record-date">
-                  追加日: {formatDate(record.acquisition_date)}
-                </div>
+                <div className="record-date">追加日: {formatDate(record.acquisition_date)}</div>
               </div>
             </div>
 

@@ -1,10 +1,10 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import { 
-  saveDiscogsToken, 
-  removeDiscogsToken, 
+import {
+  saveDiscogsToken,
+  removeDiscogsToken,
   getDiscogsToken,
   authenticate,
-  performAutoAuth
+  performAutoAuth,
 } from '../utils/discogsAuth';
 
 // コンテキストの作成
@@ -27,7 +27,7 @@ export const DiscogsAuthProvider = ({ children }) => {
           setLoading(false);
           return;
         }
-        
+
         // トークンがない場合は自動認証を試行
         const autoToken = await authenticate();
         setIsAuthenticated(!!autoToken);
@@ -38,7 +38,7 @@ export const DiscogsAuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-    
+
     initAuth();
   }, []);
 
@@ -46,7 +46,7 @@ export const DiscogsAuthProvider = ({ children }) => {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.origin !== window.location.origin) return;
-      
+
       if (event.data && event.data.type === 'DISCOGS_AUTH_CODE') {
         // 認証コードを受け取った後の状態更新
         setIsAuthenticated(true);
@@ -104,14 +104,10 @@ export const DiscogsAuthProvider = ({ children }) => {
     setToken,
     logout,
     clearError,
-    performAutomaticAuth
+    performAutomaticAuth,
   };
 
-  return (
-    <DiscogsAuthContext.Provider value={value}>
-      {children}
-    </DiscogsAuthContext.Provider>
-  );
+  return <DiscogsAuthContext.Provider value={value}>{children}</DiscogsAuthContext.Provider>;
 };
 
 // カスタムフック

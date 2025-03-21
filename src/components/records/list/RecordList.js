@@ -96,15 +96,16 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
 
   // ソート方向変更のハンドラーをカプセル化
   const handleSort = (key, direction) => {
-    onSort(key, direction || (sortConfig.key === key && sortConfig.direction === 'asc' ? 'desc' : 'asc'));
+    onSort(
+      key,
+      direction || (sortConfig.key === key && sortConfig.direction === 'asc' ? 'desc' : 'asc')
+    );
   };
 
   return (
     <div className="record-list modern">
       <div className="record-list-header">
-        <div className="record-count">
-          {records.length} 件のレコードが見つかりました
-        </div>
+        <div className="record-count">{records.length} 件のレコードが見つかりました</div>
 
         <div className="record-list-controls">
           {/* モバイルでは表示モード切り替えを非表示にすることも可能 */}
@@ -117,7 +118,9 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
               aria-pressed={viewMode === 'table'}
               disabled={isMobileView} // モバイルではテーブル表示を無効化
             >
-              <span className="view-icon" aria-hidden="true">☰</span>
+              <span className="view-icon" aria-hidden="true">
+                ☰
+              </span>
             </button>
             <button
               className={`view-mode-button ${viewMode === 'card' ? 'active' : ''}`}
@@ -126,19 +129,19 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
               aria-label="カード表示に切り替え"
               aria-pressed={viewMode === 'card'}
             >
-              <span className="view-icon" aria-hidden="true">▦</span>
+              <span className="view-icon" aria-hidden="true">
+                ▦
+              </span>
             </button>
           </div>
 
           {/* 並び順コントロール - 表示モードに関わらず常に表示 */}
-          <SortControls 
-            sortConfig={sortConfig} 
-            onSort={handleSort}
-            viewMode={viewMode}
-          />
+          <SortControls sortConfig={sortConfig} onSort={handleSort} viewMode={viewMode} />
 
           <div className="records-per-page">
-            <label htmlFor="records-per-page" className="records-per-page-label">表示件数:</label>
+            <label htmlFor="records-per-page" className="records-per-page-label">
+              表示件数:
+            </label>
             <select
               id="records-per-page"
               value={recordsPerPage}
@@ -157,16 +160,16 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
       <div className="record-list-content">
         {/* 表示モードに応じてコンポーネントを切り替え */}
         {isMobileView || viewMode === 'card' ? (
-          <RecordCards 
-            records={displayedRecords} 
+          <RecordCards
+            records={displayedRecords}
             onRecordSelect={onRecordSelect}
             onRecordDelete={onRecordDelete}
             onSort={handleSort}
             sortConfig={sortConfig}
           />
         ) : (
-          <RecordTable 
-            records={displayedRecords} 
+          <RecordTable
+            records={displayedRecords}
             onRecordSelect={onRecordSelect}
             onRecordDelete={onRecordDelete}
             onSort={handleSort}
