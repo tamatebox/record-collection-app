@@ -1,0 +1,469 @@
+/* モダンなレコードリストスタイル */
+.record-list.modern {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  overflow: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ヘッダー部分 */
+.record-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.record-count {
+  font-weight: 500;
+  color: #444;
+}
+
+.record-list-controls {
+  display: flex;
+  align-items: center; /* 中央揃えを強調 */
+  gap: 15px;
+}
+
+.view-mode-toggle {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-mode-button {
+  background: #f8f9fa;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-mode-button.active {
+  background-color: #e6f4ff;
+  color: #1890ff;
+}
+
+.view-icon {
+  font-size: 1rem;
+}
+
+.records-per-page,
+.card-sort-controls {
+  display: inline-flex;
+  align-items: center;
+  height: 36px; /* セレクトボックスの高さに合わせる */
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+
+
+/* カード表示 */
+.record-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.record-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.record-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.record-card-header {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.record-artist {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.record-card-content {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.record-album {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.record-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.record-detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.record-separator {
+  color: #ccc;
+}
+
+.record-date {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.record-card-actions {
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+/* テーブル表示 */
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch; /* iOS用の慣性スクロール */
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+.record-table th {
+  position: relative;      /* ソートアイコンの配置のため */
+  background-color: #f8f9fa;
+  padding: 12px 15px;
+  padding-right: 24px;     /* ソートアイコン用のスペース確保 */
+  font-weight: 500;
+  color: #555;
+  border-bottom: 2px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* テーブルヘッダーのテキスト配置 */
+.record-table th {
+  text-align: center; /* デフォルトは中央揃え */
+}
+
+.record-table th:nth-child(1),
+.record-table th:nth-child(2) {
+  text-align: left; /* アーティストとアルバム名は左揃え */
+}
+
+/* テーブルの各カラムの幅を設定 - サイズ列を追加した場合 */
+.record-table th:nth-child(1) { width: 18%; } /* アーティスト */
+.record-table th:nth-child(2) { width: 22%; } /* アルバム名 */
+.record-table th:nth-child(3) { width: 8%; }  /* 発売年 */
+.record-table th:nth-child(4) { width: 12%; } /* ジャンル */
+.record-table th:nth-child(5) { width: 8%; }  /* サイズ */
+.record-table th:nth-child(6) { width: 10%; } /* 追加日 */
+.record-table th:nth-child(7) { width: 12%; } /* 評価 */
+.record-table th:nth-child(8) { width: 10%; } /* アクション */
+
+.record-table th:hover {
+  background-color: #edf2f7;
+}
+
+.record-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* テーブルデータセルのテキスト配置 */
+.record-table td {
+  text-align: center; /* デフォルトは中央揃え */
+}
+
+.record-table td:nth-child(1),
+.record-table td:nth-child(2) {
+  text-align: left; /* アーティストとアルバム名は左揃え */
+}
+
+.record-table tr {
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.record-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* 星評価 */
+.record-rating {
+  display: flex;
+  gap: 1px;
+  justify-content: center; /* 中央揃え */
+}
+
+.star {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+.no-rating {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+}
+
+/* アクションボタン */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;  /* 中央揃え */
+}
+
+.view-button {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.view-button:hover {
+  background-color: #40a9ff;
+}
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  z-index: 10;  /* 他の要素より前面に表示 */
+  position: relative;  /* z-indexを有効にするため */
+}
+
+.delete-button:hover {
+  background-color: #ff7875;
+}
+
+.no-records {
+  text-align: center;
+  padding: 30px 0;
+  color: #999;
+  font-style: italic;
+}
+
+
+
+/* ページネーション */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.page-button {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 32px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.page-button:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.page-button.active {
+  background-color: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.page-button.disabled {
+  color: #d9d9d9;
+  cursor: not-allowed;
+}
+
+.page-button.disabled:hover {
+  border-color: #d9d9d9;
+  color: #d9d9d9;
+}
+
+.page-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 5px;
+  color: #999;
+}
+
+.page-info {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+
+
+.card-sort-controls label,
+.records-per-page-label {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  height: 36px; /* セレクトボックスと同じ高さ */
+  vertical-align: middle;
+  padding-top: 4px; /* 下にズラすための上パディング追加 */
+  position: relative;
+  top: 2px; /* さらに下にズラす */
+}
+
+.card-sort-controls select,
+.records-per-page select {
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  height: 36px; /* 高さを固定 */
+  vertical-align: middle;
+  box-sizing: border-box;
+  /* iOSのデフォルトスタイルをリセット */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* 矢印アイコン用の右パディング */
+  padding-right: 25px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+/* ソートアイコンのスタイル */
+.sort-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sort-icon.placeholder {
+  opacity: 0.2;
+}
+
+.sort-icon.asc {
+  color: #1890ff;
+}
+
+.sort-icon.desc {
+  color: #1890ff;
+}
+
+/* 列幅の最小値を設定（横スクロール時のため） */
+.record-table th:nth-child(1) { min-width: 120px; } /* アーティスト */
+.record-table th:nth-child(2) { min-width: 180px; } /* アルバム名 */
+.record-table th:nth-child(3) { min-width: 70px; }  /* 発売年 */
+.record-table th:nth-child(4) { min-width: 100px; } /* ジャンル */
+.record-table th:nth-child(5) { min-width: 70px; }  /* サイズ */
+.record-table th:nth-child(6) { min-width: 90px; }  /* 追加日 */
+.record-table th:nth-child(7) { min-width: 90px; }  /* 評価 */
+.record-table th:nth-child(8) { min-width: 70px; }  /* アクション */
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .record-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .record-list-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .record-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .record-table th,
+  .record-table td {
+    white-space: nowrap; /* 小さい画面でも折り返しを防止 */
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* モバイルでの削除ボタンを目立たせる */
+  .delete-button {
+    padding: 8px 12px;
+    font-weight: 500;
+  }
+}
