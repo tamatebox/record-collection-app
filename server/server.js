@@ -31,7 +31,7 @@ const db = initializeDatabase();
 
 // CORS設定
 app.use(cors({
-  origin: corsOrigins,
+  origin: '*',
   credentials: true
 }));
 
@@ -53,9 +53,8 @@ app.use(errorHandler);
 
 // サーバー起動
 const parsedUrl = new URL(REACT_APP_API_URL);
-const host = parsedUrl.hostname;
 const port = parsedUrl.port;
-const server = app.listen(port, host, () => {
+const server = app.listen(port, '0.0.0.0', () => {
   console.log(`サーバーが ${REACT_APP_API_URL} で起動しました`);
 });
 
