@@ -1,0 +1,239 @@
+/* テーブルコンポーネント */
+
+/* テーブルコンテナ */
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch; /* iOS用の慣性スクロール */
+}
+
+/* テーブル基本スタイル */
+.record-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+/* テーブルヘッダー */
+.record-table th {
+  position: relative;
+  background-color: var(--background-light);
+  padding: 12px 15px;
+  padding-right: 24px;  /* ソートアイコン用のスペース確保 */
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+/* テーブルヘッダーの左寄せ */
+.record-table th:nth-child(1),
+.record-table th:nth-child(2) {
+  text-align: left;
+}
+
+/* テーブルヘッダーのホバー状態 */
+.record-table th:hover {
+  background-color: #edf2f7;
+}
+
+/* テーブルセル */
+.record-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+/* テーブルセルの左寄せ */
+.record-table td:nth-child(1),
+.record-table td:nth-child(2) {
+  text-align: left;
+}
+
+/* テーブル行 */
+.record-table tr {
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+/* テーブル行のホバー状態 */
+.record-table tr:hover {
+  background-color: var(--background-light);
+}
+
+/* ソートアイコン */
+.sort-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sort-icon.placeholder {
+  opacity: 0.2;
+}
+
+.sort-icon.asc, .sort-icon.desc {
+  color: var(--primary-color);
+}
+
+/* テーブルのカラム幅定義 */
+.record-table th:nth-child(1) { width: 18%; min-width: 120px; } /* アーティスト */
+.record-table th:nth-child(2) { width: 22%; min-width: 180px; } /* アルバム名 */
+.record-table th:nth-child(3) { width: 8%; min-width: 70px; }   /* 発売年 */
+.record-table th:nth-child(4) { width: 12%; min-width: 100px; } /* ジャンル */
+.record-table th:nth-child(5) { width: 8%; min-width: 70px; }   /* サイズ */
+.record-table th:nth-child(6) { width: 10%; min-width: 90px; }  /* 追加日 */
+.record-table th:nth-child(7) { width: 12%; min-width: 90px; }  /* 評価 */
+.record-table th:nth-child(8) { width: 10%; min-width: 70px; }  /* アクション */
+
+/* アクションボタンコンテナ */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ソートコントロール */
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.sort-controls label {
+  margin-right: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.sort-controls select {
+  padding: 0 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--background-white);
+  font-size: 14px;
+  cursor: pointer;
+  height: 36px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 25px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+/* データなしメッセージ */
+.no-records {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ページネーション */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.page-button {
+  background-color: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 32px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.page-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.page-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.page-button.disabled {
+  color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.page-button.disabled:hover {
+  border-color: var(--border-color);
+  color: var(--border-color);
+}
+
+.page-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 5px;
+  color: var(--text-secondary);
+}
+
+.page-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* レコード表示数コントロール */
+.records-per-page-label {
+  margin-right: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.records-per-page select {
+  padding: 0 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--background-white);
+  font-size: 14px;
+  cursor: pointer;
+  height: 36px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .record-table {
+    min-width: 800px; /* スマホでは横スクロールを許可 */
+  }
+  
+  .sort-controls {
+    width: 100%;
+  }
+}

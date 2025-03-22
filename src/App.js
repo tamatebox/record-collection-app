@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+// App.cssはglobal.cssに統合されたため、import不要になりました
 import RecordList from './components/records/list/RecordList';
 import RecordFilter from './components/records/filter/RecordFilter';
 import RecordDetail from './components/records/detail/RecordDetail';
@@ -17,7 +17,7 @@ import { DiscogsAuthProvider, useDiscogsAuth } from './contexts/DiscogsAuthConte
 const AppContent = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const { isAuthenticated } = useDiscogsAuth();
-  
+
   const {
     filteredRecords,
     selectedRecord,
@@ -32,7 +32,7 @@ const AppContent = () => {
     handleAddRecord,
     handleCloseDetail,
     getMetadata,
-    handleUpdateRecord
+    handleUpdateRecord,
   } = useRecords();
 
   if (loading) {
@@ -60,10 +60,7 @@ const AppContent = () => {
         <div className="header-content">
           <h1>レコードコレクション</h1>
           <div className="header-actions">
-            <button 
-              className="add-button" 
-              onClick={() => setShowAddForm(true)}
-            >
+            <button className="add-button" onClick={() => setShowAddForm(true)}>
               レコードを追加
             </button>
           </div>
@@ -71,19 +68,19 @@ const AppContent = () => {
           <DiscogsAuthButton className="discogs-error-message" />
         </div>
       </header>
-      
+
       <main className="app-main">
         <div className="content-panel">
-          <RecordFilter 
-            filters={filters} 
+          <RecordFilter
+            filters={filters}
             onFilterChange={handleFilterChange}
             genres={metadata.genres}
             countries={metadata.countries}
             decades={metadata.decades}
             sizes={metadata.sizes}
           />
-          <RecordList 
-            records={filteredRecords} 
+          <RecordList
+            records={filteredRecords}
             onRecordSelect={handleRecordSelect}
             onRecordDelete={handleRecordDelete}
             onSort={handleSort}
@@ -91,12 +88,12 @@ const AppContent = () => {
           />
         </div>
       </main>
-      
+
       {showAddForm && (
         <div className="modal-overlay">
           <div className="modal">
-            <AddRecordForm 
-              onAddRecord={handleAddFormSubmit} 
+            <AddRecordForm
+              onAddRecord={handleAddFormSubmit}
               onCancel={() => setShowAddForm(false)}
               genres={metadata.genres}
               countries={metadata.countries}
@@ -105,13 +102,13 @@ const AppContent = () => {
           </div>
         </div>
       )}
-      
+
       {selectedRecord && (
         <div className="modal-overlay">
           <div className="modal detail-modal">
-            <RecordDetail 
-              record={selectedRecord} 
-              onClose={handleCloseDetail} 
+            <RecordDetail
+              record={selectedRecord}
+              onClose={handleCloseDetail}
               onUpdate={handleUpdateRecord}
               genres={metadata.genres}
               countries={metadata.countries}

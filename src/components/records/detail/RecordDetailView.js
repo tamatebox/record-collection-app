@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RecordStars from '../../common/RecordStars';
-import './RecordDetail.css';
+import './styles/RecordDetail.css';
 import DefaultRecordImage from '../../../assets/default-record.svg';
 
 const RecordDetailView = ({ record }) => {

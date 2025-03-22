@@ -1,0 +1,32 @@
+/* グローバルCSS変数定義 */
+:root {
+  /* カラーパレット */
+  --primary-color: #4a6cf7;
+  --primary-light: rgba(74, 108, 247, 0.1);
+  --primary-border: rgba(74, 108, 247, 0.3);
+  --primary-dark: #3a56d4;
+  --secondary-color: #2ecc71;
+  --accent-color: #1db954;
+  
+  /* テキストカラー */
+  --text-primary: #1a2b3c;
+  --text-secondary: #4e5d6c;
+  --text-light: #888;
+  
+  /* 背景色 */
+  --background-light: #f8f9fd;
+  --background-white: #ffffff;
+  
+  /* ボーダー */
+  --border-color: #e1e6ed;
+  --border-radius: 8px;
+  --input-border-radius: 6px;
+  
+  /* シャドウ */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  /* アニメーション */
+  --transition: all 0.2s ease-in-out;
+  --animation-speed: 0.2s;
+}

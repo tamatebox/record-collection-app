@@ -1,45 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RecordDetailView from './RecordDetailView';
-import RecordEdit from './RecordEdit';
-import './RecordDetail.css';
+import RecordForm from '../form/RecordForm';
+import './styles/RecordDetail.css';
 
-const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }) => {
+const RecordDetail = ({
+  record,
+  onClose,
+  onUpdate,
+  genres = [],
+  countries = [],
+  isDiscogsAvailable,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedRecord, setEditedRecord] = useState({ ...record });
-
-  // 親コンポーネントからレコードが変更された場合に反映する
-  useEffect(() => {
-    setEditedRecord({ ...record });
-  }, [record]);
-
-  // 編集フィールドの変更を処理するハンドラー
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setEditedRecord({
-      ...editedRecord,
-      [name]: type === 'checkbox' ? checked : value
-    });
-  };
-
-  // 星評価の変更を処理するハンドラー
-  const handleStarChange = (rating) => {
-    setEditedRecord({
-      ...editedRecord,
-      star: rating.toString()
-    });
-  };
 
   // 編集モードの切り替え
   const toggleEditMode = () => {
-    if (isEditing) {
-      // 編集モードのキャンセルなら元のレコードに戻す
-      setEditedRecord({ ...record });
-    }
     setIsEditing(!isEditing);
   };
 
   // レコードの保存
-  const handleSave = async () => {
+  const handleSave = async (editedRecord) => {
     try {
       await onUpdate(record.id, editedRecord);
       setIsEditing(false);
@@ -51,28 +31,50 @@ const RecordDetail = ({ record, onClose, onUpdate, genres = [], countries = [] }
   return (
     <div className="record-detail-modal">
       <div className="detail-header">
-        <h2>{isEditing ? 'レコード編集' : 'レコード詳細'}</h2>
+        <div className="header-title">
+          <h2>{isEditing ? '編集' : '詳細'}</h2>
+          <span className="header-subtitle">
+            {record.artist} - {record.album_name}
+          </span>
+        </div>
         <div className="header-actions">
           {isEditing ? (
             <>
-              <button className="save-button" onClick={handleSave}>保存</button>
-              <button className="cancel-button" onClick={toggleEditMode}>キャンセル</button>
+              <button className="cancel-button" onClick={toggleEditMode}>
+                キャンセル
+              </button>
+              <button
+                className="save-button"
+                onClick={() => {
+                  // FormのSubmitイベントを発火
+                  document.getElementById('record-form').dispatchEvent(new Event('submit'));
+                }}
+              >
+                保存
+              </button>
             </>
           ) : (
-            <button className="edit-button" onClick={toggleEditMode}>編集</button>
+            <button className="edit-button" onClick={toggleEditMode}>
+              編集
+            </button>
           )}
-          <button className="close-button" onClick={onClose}>✕</button>
+          <button className="close-button" onClick={onClose}>
+            ✕
+          </button>
         </div>
       </div>
 
       <div className="detail-content">
         {isEditing ? (
-          <RecordEdit
-            record={editedRecord}
-            onChange={handleChange}
-            onStarChange={handleStarChange}
+          <RecordForm
+            mode="edit"
+            initialRecord={record}
+            onSubmit={handleSave}
+            onCancel={toggleEditMode}
             genres={genres}
             countries={countries}
+            // 編集モードでもDiscogs検索を表示
+            isDiscogsAvailable={isDiscogsAvailable}
           />
         ) : (
           <RecordDetailView record={record} />

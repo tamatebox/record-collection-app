@@ -1,0 +1,92 @@
+/* レコード一覧のスタイル */
+@import '../../../../styles/variables.css';
+
+/* モダンなレコードリストスタイル */
+.record-list.modern {
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  overflow: auto;
+}
+
+/* ヘッダー部分 */
+.record-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.record-count {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.record-list-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 表示モード切替ボタン */
+.view-mode-toggle {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-mode-button {
+  background: var(--background-light);
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-mode-button.active {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.view-icon {
+  font-size: 1rem;
+}
+
+/* 表示件数コントロール */
+.records-per-page,
+.card-sort-controls {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .record-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .record-list-controls {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  /* モバイルでの削除ボタンを目立たせる */
+  .delete-button {
+    padding: 8px 12px;
+    font-weight: 500;
+  }
+  
+  /* モバイルでのソート表示を調整 */
+  .sort-controls {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

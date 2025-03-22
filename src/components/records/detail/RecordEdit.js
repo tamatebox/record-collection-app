@@ -3,7 +3,15 @@ import RecordStars from '../../common/RecordStars';
 import './RecordDetail.css';
 
 // 入力フィールドコンポーネント
-const InputField = ({ id, label, type = 'text', value, onChange, required = false, placeholder = '' }) => (
+const InputField = ({
+  id,
+  label,
+  type = 'text',
+  value,
+  onChange,
+  required = false,
+  placeholder = '',
+}) => (
   <div className="edit-field">
     <label htmlFor={id}>{label}</label>
     <input
@@ -22,17 +30,18 @@ const InputField = ({ id, label, type = 'text', value, onChange, required = fals
 const SelectField = ({ id, label, value, onChange, options, emptyOption = '選択してください' }) => (
   <div className="detail-item">
     <label htmlFor={id}>{label}</label>
-    <select
-      id={id}
-      name={id}
-      value={value || ''}
-      onChange={onChange}
-    >
+    <select id={id} name={id} value={value || ''} onChange={onChange}>
       {emptyOption && <option value="">{emptyOption}</option>}
-      {options.map(option => 
-        typeof option === 'object' 
-          ? <option key={option.value} value={option.value}>{option.label}</option>
-          : <option key={option} value={option}>{option}</option>
+      {options.map((option) =>
+        typeof option === 'object' ? (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ) : (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        )
       )}
     </select>
   </div>
@@ -42,12 +51,7 @@ const SelectField = ({ id, label, value, onChange, options, emptyOption = '選�
 const CheckboxField = ({ id, label, checked, onChange }) => (
   <div className="detail-item checkbox-item">
     <label>
-      <input
-        type="checkbox"
-        name={id}
-        checked={checked || false}
-        onChange={onChange}
-      />
+      <input type="checkbox" name={id} checked={checked || false} onChange={onChange} />
       {label}
     </label>
   </div>
@@ -57,18 +61,16 @@ const CheckboxField = ({ id, label, checked, onChange }) => (
 const Section = ({ title, children }) => (
   <div className="detail-section">
     <h4 className="section-title">{title}</h4>
-    <div className="detail-grid">
-      {children}
-    </div>
+    <div className="detail-grid">{children}</div>
   </div>
 );
 
 const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [] }) => {
   // サイズオプションの定義
   const sizeOptions = [
-    { value: "7", label: '7"' },
-    { value: "10", label: '10"' },
-    { value: "12", label: '12"' }
+    { value: '7', label: '7"' },
+    { value: '10', label: '10"' },
+    { value: '12', label: '12"' },
   ];
 
   return (
@@ -79,23 +81,23 @@ const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [
             <div className="record-label"></div>
           </div>
         </div>
-        
+
         <div className="record-titles">
-          <InputField 
+          <InputField
             id="album_name"
             label="アルバム名"
             value={record.album_name}
             onChange={onChange}
             required={true}
           />
-          <InputField 
+          <InputField
             id="artist"
             label="アーティスト名"
             value={record.artist}
             onChange={onChange}
             required={true}
           />
-          <InputField 
+          <InputField
             id="alphabet_artist"
             label="アーティスト名(英字)"
             value={record.alphabet_artist}
@@ -104,32 +106,32 @@ const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [
           <RecordStars rating={record.star} onChange={onStarChange} />
         </div>
       </div>
-      
+
       <div className="detail-columns">
         <div className="detail-column">
           <Section title="基本情報">
-            <SelectField 
+            <SelectField
               id="genre"
               label="ジャンル"
               value={record.genre}
               onChange={onChange}
               options={genres}
             />
-            <InputField 
+            <InputField
               id="release_year"
               label="発売年"
               value={record.release_year}
               onChange={onChange}
               placeholder="例: 1985"
             />
-            <SelectField 
+            <SelectField
               id="country"
               label="国"
               value={record.country}
               onChange={onChange}
               options={countries}
             />
-            <SelectField 
+            <SelectField
               id="size"
               label="サイズ"
               value={record.size}
@@ -137,22 +139,17 @@ const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [
               options={sizeOptions}
               emptyOption={null}
             />
-            <CheckboxField 
+            <CheckboxField
               id="compilation"
               label="コンピレーション"
               checked={record.compilation}
               onChange={onChange}
             />
           </Section>
-          
+
           <Section title="出版情報">
-            <InputField 
-              id="label"
-              label="レーベル"
-              value={record.label}
-              onChange={onChange}
-            />
-            <InputField 
+            <InputField id="label" label="レーベル" value={record.label} onChange={onChange} />
+            <InputField
               id="catalog_number"
               label="カタログ番号"
               value={record.catalog_number}
@@ -160,24 +157,24 @@ const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [
             />
           </Section>
         </div>
-        
+
         <div className="detail-column">
           <Section title="コレクション情報">
-            <InputField 
+            <InputField
               id="acquisition_date"
               label="取得日"
               type="date"
               value={record.acquisition_date}
               onChange={onChange}
             />
-            <InputField 
+            <InputField
               id="storage_location"
               label="保管場所"
               value={record.storage_location}
               onChange={onChange}
             />
           </Section>
-          
+
           <div className="detail-section">
             <h4 className="section-title">レビュー</h4>
             <textarea
@@ -189,7 +186,7 @@ const RecordEdit = ({ record, onChange, onStarChange, genres = [], countries = [
               className="review-textarea"
             />
           </div>
-          
+
           <div className="detail-section">
             <h4 className="section-title">試聴リンク</h4>
             <input

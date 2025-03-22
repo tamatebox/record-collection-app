@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './RecordList.css';
+import './styles/RecordList.css';
 import RecordTable from './RecordTable';
 import RecordCards from './RecordCards';
 import { Pagination, SortControls } from './utils/RecordUtils';

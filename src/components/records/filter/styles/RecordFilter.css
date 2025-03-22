@@ -1,0 +1,28 @@
+/* レコードフィルタースタイル */
+@import '../../../../styles/variables.css';
+
+/* このファイルは最低限の内容に保ち、ほとんどの機能は共通のfilters.cssに移動しました */
+/* 必要に応じてプロジェクト固有のオーバーライドをここに追加してください */
+
+/* フィルターセクション */
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.filter-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+/* カスタムスタイルのオーバーライド */
+.filter-dropdown-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.filter-modal-header h2 {
+  font-size: 18px;
+}
+
+/* その他のプロジェクト固有の調整があればここに追加 */

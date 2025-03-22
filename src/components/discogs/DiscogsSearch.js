@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { discogsSearch } from '../../utils/discogsAuth';
 import { useDiscogsAuth } from '../../contexts/DiscogsAuthContext';
 import { mapDiscogsSearchResultToRecord } from '../../utils/discogsMapper';
-import './DiscogsSearch.css';
+import './styles/DiscogsSearch.css';
 
 const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
   const [query, setQuery] = useState('');

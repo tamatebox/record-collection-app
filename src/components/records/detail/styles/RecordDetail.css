@@ -1,0 +1,239 @@
+/* レコード詳細スタイル */
+@import '../../../../styles/variables.css';
+
+/* レコードの主要情報 */
+.record-main-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background-color: var(--background-light);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.record-visual {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.record-image-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-image-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.record-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.record-detail-image:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.record-titles {
+  flex-grow: 1;
+}
+
+.album-title {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.artist-name {
+  margin: 0 0 6px 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.alphabet-artist {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* 詳細カラムレイアウト */
+.detail-columns {
+  display: flex;
+  gap: 24px;
+}
+
+.detail-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* セクションスタイル */
+.detail-section, .info-section {
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title, .info-section-title {
+  margin: 0 0 16px 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+/* グリッドレイアウト */
+.detail-grid, .info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* 項目スタイル */
+.detail-item, .info-item, .edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.value {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* レビューテキスト */
+.review-text {
+  margin: 0;
+  white-space: pre-line;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+/* 試聴リンク */
+.music-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 24px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  box-shadow: 0 2px 6px rgba(29, 185, 84, 0.2);
+}
+
+.music-link:hover {
+  background-color: #18a046;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(29, 185, 84, 0.3);
+}
+
+/* チェックボックススタイル */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  grid-column: 1 / -1; /* 両方のカラムにまたがる */
+  width: 100%;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-color);
+}
+
+/* テキストエリア */
+.review-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .detail-columns {
+    flex-direction: column;
+  }
+
+  .detail-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .record-main-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .rating {
+    justify-content: center;
+  }
+
+  .section-title,
+  .info-section-title {
+    font-size: 1.1rem;
+  }
+}
