@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DiscogsSearch from '../../discogs/DiscogsSearch';
 import RecordStars from '../../common/RecordStars';
-import './RecordForm.css';
+import './styles/RecordForm.css';
 
 // 入力フィールドコンポーネント
 const InputField = ({
@@ -31,23 +31,23 @@ const InputField = ({
 );
 
 // セレクトフィールドコンポーネント
-const SelectField = ({ 
-  id, 
-  label, 
-  value, 
-  onChange, 
-  options, 
+const SelectField = ({
+  id,
+  label,
+  value,
+  onChange,
+  options,
   required = false,
-  emptyOption = '選択してください' 
+  emptyOption = '選択してください'
 }) => (
   <div className="detail-item">
     <label htmlFor={id} className={required ? 'required' : ''}>
       {label}
     </label>
-    <select 
-      id={id} 
-      name={id} 
-      value={value || ''} 
+    <select
+      id={id}
+      name={id}
+      value={value || ''}
       onChange={onChange}
       required={required}
       aria-required={required}
@@ -72,11 +72,11 @@ const SelectField = ({
 const CheckboxField = ({ id, label, checked, onChange }) => (
   <div className="detail-item checkbox-item">
     <label>
-      <input 
-        type="checkbox" 
-        name={id} 
-        checked={checked || false} 
-        onChange={onChange} 
+      <input
+        type="checkbox"
+        name={id}
+        checked={checked || false}
+        onChange={onChange}
         id={id}
       />
       {label}
