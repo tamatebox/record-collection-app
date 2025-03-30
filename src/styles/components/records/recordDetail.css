@@ -61,9 +61,9 @@ div.record-header {
 img.record-image,
 img.record-image-container,
 .record-image-container img,
-div[class*="record-image"] img,
-div[class*="image"] img,
-[class*="record-image"],
+div[class*='record-image'] img,
+div[class*='image'] img,
+[class*='record-image'],
 .detail-content img {
   width: 200px !important;
   height: 200px !important;
@@ -146,7 +146,9 @@ div[class*="image"] img,
   overflow: hidden;
   position: relative; /* 絶対位置決めのために追加 */
   aspect-ratio: 1 / 1; /* 明示的にアスペクト比を1:1に */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .record-image-container:hover {
@@ -442,7 +444,7 @@ label.required::after {
 }
 
 /* ===== フォーム要素 ===== */
-.edit-field, 
+.edit-field,
 .detail-item {
   display: flex;
   flex-direction: column;
@@ -501,7 +503,7 @@ label.required::after {
   margin-bottom: 0;
 }
 
-.checkbox-item input[type="checkbox"] {
+.checkbox-item input[type='checkbox'] {
   width: 18px;
   height: 18px;
   margin: 0;
@@ -558,14 +560,14 @@ label.required::after {
   .mobile-detail-header {
     padding: 12px 16px;
   }
-  
+
   .edit-button,
   .save-button,
   .cancel-button {
     padding: 6px 12px;
     font-size: 13px;
   }
-  
+
   .close-button {
     width: 28px;
     height: 28px;
@@ -616,8 +618,12 @@ label.required::after {
 
 /* ===== アニメーション ===== */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ===== レスポンシブデザイン ===== */
@@ -660,7 +666,7 @@ label.required::after {
     gap: 12px;
     margin-bottom: 12px;
   }
-  
+
   .album-title {
     font-size: 1.2rem;
     margin-bottom: 8px;
@@ -670,31 +676,31 @@ label.required::after {
     font-size: 1.1rem;
     margin-bottom: 4px;
   }
-  
+
   .artist-alt,
   .alphabet-artist {
     font-size: 0.85rem;
     margin-bottom: 8px;
   }
-  
+
   .record-section {
     padding: 12px;
   }
-  
+
   .section-title {
     font-size: 0.95rem;
     margin-bottom: 8px;
   }
-  
+
   .info-label {
     width: 110px;
     font-size: 0.9rem;
   }
-  
+
   .music-link-container {
     text-align: center;
   }
-  
+
   .checkbox-item {
     grid-column: 1;
   }

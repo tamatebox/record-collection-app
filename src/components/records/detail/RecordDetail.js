@@ -23,13 +23,13 @@ const RecordDetail = ({
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     // 初期チェック
     checkMobile();
-    
+
     // リサイズイベント時に再計算
     window.addEventListener('resize', checkMobile);
-    
+
     // クリーンアップ
     return () => {
       window.removeEventListener('resize', checkMobile);
