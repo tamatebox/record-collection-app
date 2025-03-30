@@ -1,0 +1,701 @@
+/* 
+ * レコード詳細共通スタイル
+ * このファイルには、レコード詳細表示と編集に共通するスタイルが定義されています
+ */
+
+/* モバイル向けヘッダー調整 */
+.mobile-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fbfbfb;
+}
+
+.mobile-detail-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  flex: 1;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.mobile-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+@import '../../variables.css';
+
+/* レコード画像のサイズ修正としてカスタムスタイル追加 */
+div.record-image-container {
+  width: 200px !important;
+  height: 200px !important;
+  max-width: 200px !important;
+  max-height: 200px !important;
+  min-width: 200px !important;
+  min-height: 200px !important;
+  flex: 0 0 200px !important;
+  aspect-ratio: 1 / 1 !important;
+  display: block !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-right: 20px !important;
+}
+
+/* record-headerの修正 */
+div.record-header {
+  max-height: 250px !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+}
+
+/* モーダル内の画像サイズ修正 - 直接セレクタとクラスで指定 */
+.record-detail-modal img,
+img.record-image,
+img.record-image-container,
+.record-image-container img,
+div[class*="record-image"] img,
+div[class*="image"] img,
+[class*="record-image"],
+.detail-content img {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 8px !important;
+  display: block !important;
+  max-width: 200px !important;
+  max-height: 200px !important;
+  min-width: 200px !important;
+  min-height: 200px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* ===== レコード詳細モーダル ===== */
+.record-detail-modal {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ヘッダーセクション */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fbfbfb;
+}
+
+.detail-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* コンテンツエリア */
+.detail-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ===== レコードヘッダー（画像と基本情報） ===== */
+.record-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(to right, #f1f5f9, #f8fafc);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.record-image-container {
+  flex-shrink: 0;
+  margin-right: 20px;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative; /* 絶対位置決めのために追加 */
+  aspect-ratio: 1 / 1; /* 明示的にアスペクト比を1:1に */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.record-image-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.record-image {
+  position: absolute; /* コンテナ内で絶対位置決め */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.record-image:hover {
+  transform: scale(1.05);
+}
+
+.record-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.album-title {
+  margin: 0 0 12px 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.artist-name {
+  margin: 0 0 6px 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.artist-alt,
+.alphabet-artist {
+  margin: 0 0 10px 0;
+  font-style: italic;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ===== セクションレイアウト ===== */
+.record-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.record-section {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.section-title {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ===== データテーブル ===== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-row td {
+  padding: 5px 0;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  width: 120px;
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--text-primary);
+}
+
+/* ===== 星評価 ===== */
+.record-rating,
+.rating {
+  display: flex;
+  gap: 2px;
+  margin-top: 5px;
+}
+
+.star {
+  color: #e0e0e0;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+/* 編集可能な星評価 */
+.editable-rating .star {
+  cursor: pointer;
+}
+
+.editable-rating .star:hover {
+  transform: scale(1.1);
+}
+
+/* ===== レビュー ===== */
+.review-text {
+  margin: 10px 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  white-space: pre-line;
+  color: var(--text-primary);
+}
+
+.review-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.review-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* ===== 試聴リンク ===== */
+.music-link-container {
+  padding: 10px 0;
+}
+
+.music-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(29, 185, 84, 0.2);
+  transition: all 0.2s ease;
+}
+
+.music-link:hover {
+  background-color: #18a046;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(29, 185, 84, 0.3);
+}
+
+.full-width-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  background-color: white;
+  transition: var(--transition);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.full-width-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* ===== フォーム固有スタイル ===== */
+.discogs-search-section {
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.discogs-data-loaded-notification {
+  margin: 15px 0;
+  padding: 12px 16px;
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  border-radius: 4px;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.check-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* レコードの視覚表現 */
+.record-visual .record-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+  background-color: #333;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.record-visual .record-label {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 必須フィールドのラベル */
+label.required::after {
+  content: '*';
+  color: #e53935;
+  margin-left: 4px;
+}
+
+/* ===== 画像拡大モーダル ===== */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-image,
+.image-modal-content {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== フォーム要素 ===== */
+.edit-field, 
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.edit-field label,
+.detail-item label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.edit-field input,
+.detail-item input,
+.detail-item select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  background-color: white;
+  transition: var(--transition);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.edit-field input:focus,
+.detail-item input:focus,
+.detail-item select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* チェックボックス */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-color);
+}
+
+/* ===== グリッドレイアウト ===== */
+.detail-columns {
+  display: flex;
+  gap: 24px;
+}
+
+.detail-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* ===== ボタン ===== */
+.edit-button,
+.save-button,
+.cancel-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* モバイル用その他調整 */
+@media (max-width: 768px) {
+  .mobile-detail-header {
+    padding: 12px 16px;
+  }
+  
+  .edit-button,
+  .save-button,
+  .cancel-button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .close-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+  }
+}
+
+.edit-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.save-button {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #18a046;
+}
+
+.cancel-button {
+  background-color: #f5f5f5;
+  color: var(--text-secondary);
+}
+
+.cancel-button:hover {
+  background-color: #e7e7e7;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  color: var(--text-primary);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ===== アニメーション ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== レスポンシブデザイン ===== */
+@media (max-width: 768px) {
+  .record-image-container {
+    width: 140px;
+    height: 140px;
+    margin-right: 0;
+    margin-bottom: 15px;
+    /* アスペクト比は維持 */
+    aspect-ratio: 1 / 1;
+  }
+  .record-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .record-image-container {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .record-rating {
+    justify-content: center;
+  }
+
+  .detail-columns {
+    flex-direction: column;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .record-section-row,
+  .section-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .album-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  .artist-name {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+  
+  .artist-alt,
+  .alphabet-artist {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  
+  .record-section {
+    padding: 12px;
+  }
+  
+  .section-title {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  
+  .info-label {
+    width: 110px;
+    font-size: 0.9rem;
+  }
+  
+  .music-link-container {
+    text-align: center;
+  }
+  
+  .checkbox-item {
+    grid-column: 1;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DiscogsSearch from '../../discogs/DiscogsSearch';
 import RecordStars from '../../common/RecordStars';
-import './styles/RecordForm.css';
+import '../../../styles/components/records/recordDetail.css';
 
 // 入力フィールドコンポーネント
 const InputField = ({

@@ -15,6 +15,7 @@
 @import './components/tables.css';
 @import './components/cards.css';
 @import './components/filters.css';
+@import './components/records/recordDetail.css';
 
 /* 基本スタイル */
 body {
