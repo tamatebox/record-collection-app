@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { formatDate, renderStars, getSortIcon, NoRecordsMessage } from './utils/RecordUtils';
+import { formatDate, getSortIcon, NoRecordsMessage } from './utils/RecordUtils';
 import DefaultRecordImage from '../../../assets/default-record.svg';
 
 /**
@@ -71,13 +71,6 @@ const RecordTable = ({ records, onRecordSelect, onRecordDelete, onSort, sortConf
             >
               追加日 {getSortIcon('acquisition_date', sortConfig)}
             </th>
-            <th
-              onClick={() => onSort('star')}
-              role="columnheader"
-              aria-sort={sortConfig.key === 'star' ? sortConfig.direction : 'none'}
-            >
-              評価 {getSortIcon('star', sortConfig)}
-            </th>
             <th role="columnheader">{/* アクションカラム - テキストなし */}</th>
           </tr>
         </thead>
@@ -127,7 +120,6 @@ const RecordTable = ({ records, onRecordSelect, onRecordDelete, onSort, sortConf
                 <td role="cell" title={formatDate(record.acquisition_date)}>
                   {formatDate(record.acquisition_date)}
                 </td>
-                <td role="cell">{renderStars(record.star)}</td>
                 <td role="cell" className="action-buttons">
                   <button
                     className="delete-button"

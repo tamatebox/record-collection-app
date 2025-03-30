@@ -16,7 +16,7 @@ export const formatDate = (dateString) => {
   }
 };
 
-// 評価の星を表示 (アクセシビリティ対応)
+// 評価の星を表示 (アクセシビリティ対応) - 残しておきますが使用箇所を削除しています
 export const renderStars = (rating) => {
   const stars = [];
   const numRating = rating ? parseInt(rating, 10) : 0;
@@ -75,8 +75,6 @@ export const SortControls = ({ sortConfig, onSort, viewMode }) => (
       <option value="release_year-desc">発売年 (新しい順)</option>
       <option value="acquisition_date-asc">追加日 (古い順)</option>
       <option value="acquisition_date-desc">追加日 (新しい順)</option>
-      <option value="star-desc">評価 (高い順)</option>
-      <option value="star-asc">評価 (低い順)</option>
     </select>
   </div>
 );

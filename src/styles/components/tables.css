@@ -34,9 +34,14 @@
 }
 
 /* テーブルヘッダーの左寄せ */
-.record-table th:nth-child(1),
-.record-table th:nth-child(2) {
+.record-table th:nth-child(2),
+.record-table th:nth-child(3) {
   text-align: left;
+}
+
+/* 画像カラムは中央揃え */
+.record-table th:nth-child(1) {
+  text-align: center;
 }
 
 /* テーブルヘッダーのホバー状態 */
@@ -56,9 +61,14 @@
 }
 
 /* テーブルセルの左寄せ */
-.record-table td:nth-child(1),
-.record-table td:nth-child(2) {
+.record-table td:nth-child(2),
+.record-table td:nth-child(3) {
   text-align: left;
+}
+
+/* 画像セルは中央揃え */
+.record-table td:nth-child(1) {
+  text-align: center;
 }
 
 /* テーブル行 */
@@ -93,21 +103,42 @@
   color: var(--primary-color);
 }
 
-/* テーブルのカラム幅定義 */
-.record-table th:nth-child(1) { width: 18%; min-width: 120px; } /* アーティスト */
-.record-table th:nth-child(2) { width: 22%; min-width: 180px; } /* アルバム名 */
-.record-table th:nth-child(3) { width: 8%; min-width: 70px; }   /* 発売年 */
-.record-table th:nth-child(4) { width: 12%; min-width: 100px; } /* ジャンル */
-.record-table th:nth-child(5) { width: 8%; min-width: 70px; }   /* サイズ */
-.record-table th:nth-child(6) { width: 10%; min-width: 90px; }  /* 追加日 */
-.record-table th:nth-child(7) { width: 12%; min-width: 90px; }  /* 評価 */
-.record-table th:nth-child(8) { width: 10%; min-width: 70px; }  /* アクション */
+/* テーブルのカラム幅定義 - 評価列を削除して調整 */
+.record-table th.image-column { width: 60px; min-width: 60px; } /* 画像 */
+.record-table th:nth-child(2) { width: 20%; min-width: 130px; } /* アーティスト */
+.record-table th:nth-child(3) { width: 25%; min-width: 200px; } /* アルバム名 */
+.record-table th:nth-child(4) { width: 8%; min-width: 70px; }   /* 発売年 */
+.record-table th:nth-child(5) { width: 14%; min-width: 110px; } /* ジャンル */
+.record-table th:nth-child(6) { width: 8%; min-width: 70px; }   /* サイズ */
+.record-table th:nth-child(7) { width: 12%; min-width: 90px; }  /* 追加日 */
+.record-table th:nth-child(8) { width: 13%; min-width: 80px; }  /* アクション */
 
 /* アクションボタンコンテナ */
 .action-buttons {
   display: flex;
   gap: 8px;
   justify-content: center;
+}
+
+/* レコードサムネイル関連 - 追加 */
+.record-thumbnail-cell {
+  padding: 6px !important;
+}
+
+.record-thumbnail-container {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 0 auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.record-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ソートコントロール */
