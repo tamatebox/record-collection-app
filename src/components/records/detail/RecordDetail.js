@@ -3,6 +3,10 @@ import RecordDetailView from './RecordDetailView';
 import RecordForm from '../form/RecordForm';
 import './styles/RecordDetail.css';
 
+/**
+ * レコード詳細表示のメインコンポーネント
+ * 詳細表示と編集モードの切り替えを管理
+ */
 const RecordDetail = ({
   record,
   onClose,
@@ -31,12 +35,7 @@ const RecordDetail = ({
   return (
     <div className="record-detail-modal">
       <div className="detail-header">
-        <div className="header-title">
-          <h2>{isEditing ? '編集' : '詳細'}</h2>
-          <span className="header-subtitle">
-            {record.artist} - {record.album_name}
-          </span>
-        </div>
+        <h2>{isEditing ? 'レコード編集' : 'レコード詳細'}</h2>
         <div className="header-actions">
           {isEditing ? (
             <>
@@ -47,7 +46,7 @@ const RecordDetail = ({
                 className="save-button"
                 onClick={() => {
                   // FormのSubmitイベントを発火
-                  document.getElementById('record-form').dispatchEvent(new Event('submit'));
+                  document.getElementById('record-form')?.dispatchEvent(new Event('submit'));
                 }}
               >
                 保存
