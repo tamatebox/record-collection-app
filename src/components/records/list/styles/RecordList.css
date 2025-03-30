@@ -77,13 +77,13 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  
+
   /* モバイルでの削除ボタンを目立たせる */
   .delete-button {
     padding: 8px 12px;
     font-weight: 500;
   }
-  
+
   /* モバイルでのソート表示を調整 */
   .sort-controls {
     width: 100%;

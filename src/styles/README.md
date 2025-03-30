@@ -92,21 +92,31 @@ import './styles/MyComponent.css';
 
 ```css
 /* ブロック：コンポーネントの基本単位 */
-.record-card { }
+.record-card {
+}
 
 /* 要素：ブロックの一部 */
-.record-card__title { }
-.record-card__image { }
+.record-card__title {
+}
+.record-card__image {
+}
 
 /* 修飾子：状態や見た目のバリエーション */
-.record-card--featured { }
-.record-card--compact { }
+.record-card--featured {
+}
+.record-card--compact {
+}
 ```
 
 ユーティリティクラスは短く直感的な名前を使います：
+
 ```css
-.m-2 { margin: 0.5rem; }
-.text-primary { color: var(--text-primary); }
+.m-2 {
+  margin: 0.5rem;
+}
+.text-primary {
+  color: var(--text-primary);
+}
 ```
 
 ### 優先順位とカスケード
@@ -128,45 +138,57 @@ import './styles/MyComponent.css';
 /* デフォルトのスタイルはこちら */
 
 /* タブレット: 768px-1023px */
-@media (min-width: 768px) { }
+@media (min-width: 768px) {
+}
 
 /* デスクトップ: 1024px以上 */
-@media (min-width: 1024px) { }
+@media (min-width: 1024px) {
+}
 
 /* 大型ディスプレイ: 1440px以上 */
-@media (min-width: 1440px) { }
+@media (min-width: 1440px) {
+}
 ```
 
 コンポーネント固有のメディアクエリは、関連するコンポーネントのスタイルに直接含めます（ファイル分割せず）：
 
 ```css
 /* record-list.css */
-.record-list { /* 通常のスタイル */ }
+.record-list {
+  /* 通常のスタイル */
+}
 
 @media (max-width: 768px) {
-  .record-list { /* モバイル対応スタイル */ }
+  .record-list {
+    /* モバイル対応スタイル */
+  }
 }
 ```
 
 ### ベストプラクティス
 
 1. **CSS変数を最大限に活用する**
+
    - 色、サイズ、間隔などには常に変数を使用
    - 直接数値を書く代わりに意味のある変数名を使用
 
 2. **コンポーネントの分離を意識する**
+
    - コンポーネントは他への依存を最小限に抑え、独立して機能するように設計
    - 外部の影響を受けないカプセル化されたスタイルを目指す
 
 3. **カスケーディングを制限する**
+
    - セレクタのネストは3レベル以内に抑える
    - 長いセレクタチェーンを避ける
 
 4. **コメントを効果的に使用する**
+
    - 複雑なスタイルには説明コメントを追加
    - ハック的な対応には理由と代替案をコメントで説明
 
 5. **パフォーマンスを考慮する**
+
    - アニメーションには`transform`や`opacity`を優先的に使用
    - 過度に複雑なセレクタや`box-shadow`などの重い描画は避ける
 
@@ -177,13 +199,16 @@ import './styles/MyComponent.css';
 ### 新しいCSS機能の活用
 
 1. **Grid Layout**
+
    - 複雑なレイアウトにはFlexboxよりもCSSグリッドを優先
    - 明示的な配置が必要な場合には`grid-template-areas`を活用
 
 2. **Flexbox**
+
    - 1次元レイアウトや単純な整列には、Flexboxを使用
 
 3. **カスタムプロパティ（CSS変数）**
+
    - 動的に変更する可能性のある値には、JavaScriptからアクセス可能なCSS変数を使用
 
 4. **スムーズなトランジション**

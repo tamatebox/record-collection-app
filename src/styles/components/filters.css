@@ -142,7 +142,7 @@
   background-color: var(--background-light);
 }
 
-.filter-option input[type="checkbox"] {
+.filter-option input[type='checkbox'] {
   margin-right: 8px;
   width: 18px;
   height: 18px;
@@ -318,7 +318,7 @@
   padding: 6px 0;
 }
 
-.checkbox-item input[type="checkbox"] {
+.checkbox-item input[type='checkbox'] {
   margin-right: 8px;
   width: 18px;
   height: 18px;
@@ -370,7 +370,7 @@
 }
 
 .multi-select-placeholder::after {
-  content: "▼";
+  content: '▼';
   position: absolute;
   right: 16px;
   top: 50%;
@@ -421,7 +421,7 @@
   background-color: var(--background-light);
 }
 
-.multi-select-option input[type="checkbox"] {
+.multi-select-option input[type='checkbox'] {
   margin-right: 8px;
   width: 18px;
   height: 18px;

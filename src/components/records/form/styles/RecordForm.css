@@ -126,7 +126,7 @@
 
 /* 必須フィールドのラベル */
 label.required::after {
-  content: "*";
+  content: '*';
   color: var(--error-color);
   margin-left: 4px;
 }
@@ -254,11 +254,11 @@ textarea {
 }
 
 /* ボタンのリップルエフェクト */
-.save-button::after, 
-.cancel-button::after, 
+.save-button::after,
+.cancel-button::after,
 .edit-button::after,
 .submit-button::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -271,8 +271,8 @@ textarea {
   transform-origin: 50% 50%;
 }
 
-.save-button:active::after, 
-.cancel-button:active::after, 
+.save-button:active::after,
+.cancel-button:active::after,
 .edit-button:active::after,
 .submit-button:active::after {
   animation: ripple 0.6s ease-out;
@@ -326,8 +326,12 @@ textarea {
 }
 
 @keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .record-label {
@@ -486,7 +490,7 @@ textarea {
   margin-bottom: 0;
 }
 
-.checkbox-item input[type="checkbox"] {
+.checkbox-item input[type='checkbox'] {
   width: 18px;
   height: 18px;
   margin: 0;

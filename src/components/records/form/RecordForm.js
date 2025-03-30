@@ -38,7 +38,7 @@ const SelectField = ({
   onChange,
   options,
   required = false,
-  emptyOption = '選択してください'
+  emptyOption = '選択してください',
 }) => (
   <div className="detail-item">
     <label htmlFor={id} className={required ? 'required' : ''}>
@@ -72,13 +72,7 @@ const SelectField = ({
 const CheckboxField = ({ id, label, checked, onChange }) => (
   <div className="detail-item checkbox-item">
     <label>
-      <input
-        type="checkbox"
-        name={id}
-        checked={checked || false}
-        onChange={onChange}
-        id={id}
-      />
+      <input type="checkbox" name={id} checked={checked || false} onChange={onChange} id={id} />
       {label}
     </label>
   </div>

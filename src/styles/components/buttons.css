@@ -106,7 +106,10 @@
 }
 
 /* 編集・保存・キャンセルボタン */
-.edit-button, .save-button, .cancel-button, .add-button {
+.edit-button,
+.save-button,
+.cancel-button,
+.add-button {
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.95rem;

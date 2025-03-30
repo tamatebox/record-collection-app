@@ -16,13 +16,13 @@ label {
 }
 
 /* 入力フィールド */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="date"],
-input[type="url"],
-input[type="search"],
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='date'],
+input[type='url'],
+input[type='search'],
 textarea,
 select {
   padding: 0.75rem;
@@ -78,7 +78,7 @@ textarea {
 }
 
 /* チェックボックス */
-input[type="checkbox"] {
+input[type='checkbox'] {
   margin-right: 0.5rem;
   width: 18px;
   height: 18px;
@@ -86,7 +86,7 @@ input[type="checkbox"] {
 }
 
 /* ラジオボタン */
-input[type="radio"] {
+input[type='radio'] {
   margin-right: 0.5rem;
   cursor: pointer;
 }
@@ -177,7 +177,7 @@ input[type="radio"] {
 
 /* 必須フィールドのラベル */
 .required-field::after {
-  content: "*";
+  content: '*';
   color: #ff4d4f;
   margin-left: 0.25rem;
 }

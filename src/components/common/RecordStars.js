@@ -16,11 +16,7 @@ const RecordStars = ({ rating, onChange, readOnly = false }) => {
     return (
       <div className="rating" aria-label={`${numRating}星評価（5段階中）`}>
         {[...Array(5)].map((_, i) => (
-          <span 
-            key={i} 
-            className={i < numRating ? 'star filled' : 'star'} 
-            aria-hidden="true"
-          >
+          <span key={i} className={i < numRating ? 'star filled' : 'star'} aria-hidden="true">
             ★
           </span>
         ))}
@@ -30,19 +26,15 @@ const RecordStars = ({ rating, onChange, readOnly = false }) => {
 
   // クリック可能な星を表示
   return (
-    <div 
-      className="rating editable-rating" 
+    <div
+      className="rating editable-rating"
       onMouseLeave={() => setHoverRating(0)}
       aria-label="評価を選択（5段階）"
     >
       {[...Array(5)].map((_, i) => (
         <span
           key={i}
-          className={
-            (hoverRating > 0 ? i < hoverRating : i < numRating) 
-              ? 'star filled' 
-              : 'star'
-          }
+          className={(hoverRating > 0 ? i < hoverRating : i < numRating) ? 'star filled' : 'star'}
           onClick={() => onChange && onChange(i + 1)}
           onMouseEnter={() => setHoverRating(i + 1)}
           tabIndex="0"
