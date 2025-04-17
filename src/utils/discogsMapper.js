@@ -29,7 +29,7 @@ export const mapDiscogsSearchResultToRecord = (result) => {
   // タイトルからアーティストとアルバム名を抽出
   const [artist, albumName] = splitTitle(result.title);
 
-  // ジャンルとスタイルを結合
+  // ジャンル
   const genres = [];
   if (result.genre) {
     if (Array.isArray(result.genre)) genres.push(...result.genre);

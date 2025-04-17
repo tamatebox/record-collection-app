@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import RecordForm from './RecordForm';
 import '../../../styles/components/records/record-common.css';
 import './styles/AddRecordForm.css';
@@ -14,6 +14,16 @@ const AddRecordForm = ({
     onAddRecord(submittedData);
   };
 
+  // フォーム参照
+  const formRef = useRef(null);
+
+  // 保存ボタンのクリックハンドラー
+  const handleSaveClick = () => {
+    if (formRef.current && typeof formRef.current.submitForm === 'function') {
+      formRef.current.submitForm();
+    }
+  };
+
   return (
     <div className="add-record-modal">
       <div className="detail-header">
@@ -24,7 +34,7 @@ const AddRecordForm = ({
           <button type="button" className="cancel-button" onClick={onCancel}>
             キャンセル
           </button>
-          <button type="submit" className="save-button" form="record-form">
+          <button type="button" className="save-button" onClick={handleSaveClick}>
             追加
           </button>
         </div>
@@ -38,6 +48,7 @@ const AddRecordForm = ({
           genres={genres}
           countries={countries}
           isDiscogsAvailable={isDiscogsAvailable}
+          ref={formRef}
         />
       </div>
     </div>

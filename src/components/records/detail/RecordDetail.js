@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import RecordDetailView from './RecordDetailView';
 import RecordForm from '../form/RecordForm';
 import '../../../styles/components/records/record-common.css';
@@ -51,6 +51,17 @@ const RecordDetail = ({
     }
   };
 
+  // フォーム参照を保持する
+  const formRef = useRef(null);
+
+  // 保存ボタンのクリックハンドラ
+  const handleSaveClick = () => {
+    // formRefが設定されていれば、その中のsubmit関数を呼び出す
+    if (formRef.current && typeof formRef.current.submitForm === 'function') {
+      formRef.current.submitForm();
+    }
+  };
+
   return (
     <div className="record-detail-modal">
       {isMobile ? (
@@ -62,12 +73,7 @@ const RecordDetail = ({
                 <button className="cancel-button" onClick={toggleEditMode}>
                   キャンセル
                 </button>
-                <button
-                  className="save-button"
-                  onClick={() => {
-                    document.getElementById('record-form')?.dispatchEvent(new Event('submit'));
-                  }}
-                >
+                <button className="save-button" onClick={handleSaveClick}>
                   保存
                 </button>
               </>
@@ -90,12 +96,7 @@ const RecordDetail = ({
                 <button className="cancel-button" onClick={toggleEditMode}>
                   キャンセル
                 </button>
-                <button
-                  className="save-button"
-                  onClick={() => {
-                    document.getElementById('record-form')?.dispatchEvent(new Event('submit'));
-                  }}
-                >
+                <button className="save-button" onClick={handleSaveClick}>
                   保存
                 </button>
               </>
@@ -121,6 +122,7 @@ const RecordDetail = ({
             genres={genres}
             countries={countries}
             isDiscogsAvailable={isDiscogsAvailable}
+            ref={formRef}
           />
         ) : (
           <RecordDetailView record={record} />

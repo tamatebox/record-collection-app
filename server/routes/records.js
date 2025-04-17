@@ -115,7 +115,7 @@ router.put('/:id', (req, res) => {
       acquisition_date = ?,
       storage_location = ?,
       catalog_number = ?,
-      discogs_id = ?,
+      discogs_id = ?
     WHERE id = ?
   `);
 

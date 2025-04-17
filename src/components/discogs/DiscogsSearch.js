@@ -83,7 +83,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="カタログナンバーやアルバム名を入力"
+              placeholder="カタログ番号やアルバム名を入力"
               className="search-input"
               disabled={loading}
             />
