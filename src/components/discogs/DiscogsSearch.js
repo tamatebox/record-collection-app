@@ -91,8 +91,11 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
               onClick={handleSearch}
               className={`search-button ${loading ? 'loading' : ''}`}
               disabled={loading}
+              style={{ flexDirection: 'row' }}
             >
-              {loading ? '検索中...' : '検索'}
+              <span className="search-button-text" style={{ display: 'inline-block' }}>
+                {loading ? '検索中...' : '検索'}
+              </span>
             </button>
           </div>
 
