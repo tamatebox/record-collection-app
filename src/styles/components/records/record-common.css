@@ -1,0 +1,370 @@
+/* 
+ * レコード共通スタイル
+ * 詳細表示と編集フォームの両方で使用される共通スタイル
+ */
+
+@import '../../variables.css';
+
+/* ===== 共通レイアウト ===== */
+.record-detail-modal {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.record-detail-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ヘッダーセクション */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fbfbfb;
+}
+
+.detail-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* モバイル向けヘッダー調整 */
+.mobile-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fbfbfb;
+}
+
+.mobile-detail-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  flex: 1;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.mobile-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* コンテンツエリア */
+.detail-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ===== ボタン ===== */
+.edit-button,
+.save-button,
+.cancel-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.save-button {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #18a046;
+}
+
+.cancel-button {
+  background-color: #f5f5f5;
+  color: var(--text-secondary);
+}
+
+.cancel-button:hover {
+  background-color: #e7e7e7;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  color: var(--text-primary);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ===== セクションレイアウト ===== */
+.record-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.record-section {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.section-title {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ===== レコード画像 ===== */
+.record-image-container {
+  flex-shrink: 0;
+  margin-right: 20px;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.record-image-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.record-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.record-image:hover {
+  transform: scale(1.05);
+}
+
+/* ===== 星評価 ===== */
+.record-rating,
+.rating {
+  display: flex;
+  gap: 2px;
+  margin-top: 5px;
+}
+
+.star {
+  color: #e0e0e0;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+/* 編集可能な星評価 */
+.editable-rating .star {
+  cursor: pointer;
+}
+
+.editable-rating .star:hover {
+  transform: scale(1.1);
+}
+
+/* ===== データテーブル共通 ===== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-row td {
+  padding: 5px 0;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  width: 120px;
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--text-primary);
+}
+
+/* ===== レビュー共通 ===== */
+.review-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.review-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* ===== Discogs通知 ===== */
+.discogs-search-section {
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.discogs-data-loaded-notification {
+  margin: 15px 0;
+  padding: 12px 16px;
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  border-radius: 4px;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.check-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ===== アニメーション ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== レスポンシブデザイン共通 ===== */
+@media (max-width: 768px) {
+  .mobile-detail-header {
+    padding: 12px 16px;
+  }
+
+  .edit-button,
+  .save-button,
+  .cancel-button {
+    padding: 6px 12px;
+    font-size: 13px;
+    min-width: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  .close-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+    margin-left: 5px;
+  }
+
+  .mobile-header-actions .edit-button {
+    margin-left: auto;
+  }
+
+  .record-section-row,
+  .section-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .record-section {
+    padding: 12px;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .info-label {
+    width: 110px;
+    font-size: 0.9rem;
+  }
+}

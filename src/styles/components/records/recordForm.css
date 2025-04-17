@@ -1,0 +1,234 @@
+/* 
+ * レコード編集/追加フォーム用スタイル
+ * 編集/追加フォーム画面に特化したスタイル
+ */
+
+@import './record-common.css';
+
+/* フォーム入力用の追加スタイル */
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.info-value .form-input {
+  margin: 0;
+}
+
+/* フォームテーブルセル内の入力欄調整 */
+.info-value input[type='text'],
+.info-value input[type='url'],
+.info-value input[type='date'],
+.info-value select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+/* チェックボックスラベルのスタイル */
+.info-table .checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.info-table .checkbox-label input[type='checkbox'] {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox-text {
+  margin-left: 6px;
+  font-size: 0.95rem;
+}
+
+/* タイトル編集入力スタイル */
+.album-title-input,
+.artist-name-input,
+.alphabet-artist-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.album-title-input:focus,
+.artist-name-input:focus,
+.alphabet-artist-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.title-input-group,
+.artist-input-group,
+.alphabet-artist-input-group {
+  margin-bottom: 10px;
+}
+
+/* ===== フォーム要素 ===== */
+.edit-field,
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.edit-field label,
+.detail-item label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.edit-field input,
+.detail-item input,
+.detail-item select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  background-color: white;
+  transition: var(--transition);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.edit-field input:focus,
+.detail-item input:focus,
+.detail-item select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* チェックボックス */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.checkbox-item input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-color);
+}
+
+/* ===== グリッドレイアウト ===== */
+.detail-columns {
+  display: flex;
+  gap: 24px;
+}
+
+.detail-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* 必須フィールドのラベル */
+label.required::after {
+  content: '*';
+  color: #e53935;
+  margin-left: 4px;
+}
+
+/* レコードの視覚表現 */
+.record-visual .record-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+  background-color: #333;
+}
+
+.record-visual .record-label {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-width-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  font-size: 1rem;
+  background-color: white;
+  transition: var(--transition);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.full-width-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+}
+
+/* ===== モバイル対応 ===== */
+@media (max-width: 768px) {
+  .detail-columns {
+    flex-direction: column;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-item {
+    grid-column: 1;
+  }
+}

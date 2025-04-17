@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import RecordDetailView from './RecordDetailView';
 import RecordForm from '../form/RecordForm';
-import '../../../styles/components/records/recordDetail.css';
+import '../../../styles/components/records/record-common.css';
 
 /**
  * レコード詳細表示のメインコンポーネント

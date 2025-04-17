@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DiscogsSearch from '../../discogs/DiscogsSearch';
 import RecordStars from '../../common/RecordStars';
 import DefaultRecordImage from '../../../assets/default-record.svg';
-import '../../../styles/components/records/recordDetail.css';
+import '../../../styles/components/records/recordForm.css';
 
 /**
  * 改良版レコードフォーム - 詳細画面のUIに合わせた編集フォーム

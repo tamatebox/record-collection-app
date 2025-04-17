@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RecordForm from './RecordForm';
+import '../../../styles/components/records/record-common.css';
 import './styles/AddRecordForm.css';
 
 const AddRecordForm = ({
@@ -9,24 +10,6 @@ const AddRecordForm = ({
   countries = [],
   isDiscogsAvailable = false,
 }) => {
-  const [formData, setFormData] = useState({
-    artist: '',
-    album_name: '',
-    release_year: '',
-    genre: '',
-    country: '',
-    size: '12',
-    label: '',
-    compilation: false,
-    star: '',
-    review: '',
-    alphabet_artist: '',
-    music_link: '',
-    acquisition_date: new Date().toISOString().split('T')[0],
-    storage_location: '自宅',
-    catalog_number: '',
-  });
-
   const handleSubmit = (submittedData) => {
     onAddRecord(submittedData);
   };
@@ -50,7 +33,6 @@ const AddRecordForm = ({
       <div className="detail-content">
         <RecordForm
           mode="add"
-          initialRecord={formData}
           onSubmit={handleSubmit}
           onCancel={onCancel}
           genres={genres}
