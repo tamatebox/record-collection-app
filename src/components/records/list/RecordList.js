@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/RecordList.css';
 import RecordTable from './RecordTable';
 import RecordCards from './RecordCards';
+import MobileRecordView from './MobileRecordView';
 import { Pagination, SortControls } from './utils/RecordUtils';
 
 /**
@@ -29,10 +30,8 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
       const mobile = window.innerWidth < 768;
       setIsMobileView(mobile);
 
-      // モバイルの場合、自動的にカードビューに切り替え
-      if (mobile && viewMode === 'table') {
-        setViewMode('card');
-      }
+      // 注意: モバイル表示でもテーブル/カード表示を切り替え可能にしたため、
+      // 自動切替えは行わないようにしました
     };
 
     window.addEventListener('resize', handleResize);
@@ -116,7 +115,6 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
               title="テーブル表示"
               aria-label="テーブル表示に切り替え"
               aria-pressed={viewMode === 'table'}
-              disabled={isMobileView} // モバイルではテーブル表示を無効化
             >
               <span className="view-icon" aria-hidden="true">
                 ☰
@@ -158,8 +156,16 @@ const RecordList = ({ records, onRecordSelect, onRecordDelete, onSort, sortConfi
       </div>
 
       <div className="record-list-content">
-        {/* 表示モードに応じてコンポーネントを切り替え */}
-        {isMobileView || viewMode === 'card' ? (
+        {/* モバイル表示の場合はMobileRecordViewを使用 */}
+        {isMobileView ? (
+          <MobileRecordView
+            records={displayedRecords}
+            onRecordSelect={onRecordSelect}
+            onRecordDelete={onRecordDelete}
+            viewMode={viewMode}
+          />
+        ) : /* デスクトップ表示の場合は表示モードに応じて切り替え */
+        viewMode === 'card' ? (
           <RecordCards
             records={displayedRecords}
             onRecordSelect={onRecordSelect}
