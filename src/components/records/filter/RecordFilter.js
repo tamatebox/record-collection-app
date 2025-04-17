@@ -434,33 +434,12 @@ const RecordFilter = ({
                   その他のフィルター
                   {(localFilters.countries.length > 0 || localFilters.sizes.length > 0) && (
                     <span className="filter-badge">
-                      {localFilters.countries.length + localFilters.sizes.length}
+                      {localFilters.sizes.length + localFilters.countries.length}
                     </span>
                   )}
                 </>
               }
             >
-              <div className="filter-dropdown-section">
-                <h4>国</h4>
-                <div className="filter-option-grid">
-                  {countries.map((country) => (
-                    <label key={country} className="filter-option">
-                      <input
-                        type="checkbox"
-                        checked={localFilters.countries.includes(country)}
-                        onChange={() => {
-                          const newCountries = localFilters.countries.includes(country)
-                            ? localFilters.countries.filter((c) => c !== country)
-                            : [...localFilters.countries, country];
-                          handleFilterChange('countries', newCountries);
-                        }}
-                      />
-                      <span>{country}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
               <div className="filter-dropdown-section">
                 <h4>サイズ</h4>
                 <div className="filter-option-grid">
@@ -477,6 +456,27 @@ const RecordFilter = ({
                         }}
                       />
                       <span>{size}"</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-dropdown-section">
+                <h4>国</h4>
+                <div className="filter-option-grid">
+                  {countries.map((country) => (
+                    <label key={country} className="filter-option">
+                      <input
+                        type="checkbox"
+                        checked={localFilters.countries.includes(country)}
+                        onChange={() => {
+                          const newCountries = localFilters.countries.includes(country)
+                            ? localFilters.countries.filter((c) => c !== country)
+                            : [...localFilters.countries, country];
+                          handleFilterChange('countries', newCountries);
+                        }}
+                      />
+                      <span>{country}</span>
                     </label>
                   ))}
                 </div>

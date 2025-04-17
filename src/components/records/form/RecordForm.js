@@ -209,12 +209,12 @@ const RecordForm = ({
           <div className="detail-section">
             <h4 className="section-title">基本情報</h4>
             <div className="detail-grid">
-              <SelectField
+              <InputField
                 id="genre"
                 label="ジャンル"
                 value={formData.genre}
                 onChange={handleChange}
-                options={genres}
+                placeholder="例: Rock, Jazz, Classical"
               />
               <InputField
                 id="release_year"
@@ -223,12 +223,12 @@ const RecordForm = ({
                 onChange={handleChange}
                 placeholder="例: 1985"
               />
-              <SelectField
+              <InputField
                 id="country"
                 label="国"
                 value={formData.country}
                 onChange={handleChange}
-                options={countries}
+                placeholder="例: JP, UK, US"
               />
               <SelectField
                 id="size"

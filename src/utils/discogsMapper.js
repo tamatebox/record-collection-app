@@ -1,3 +1,6 @@
+const countries = require('i18n-iso-countries');
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+
 /**
  * タイトル文字列からアーティスト名とアルバム名を分割する関数
  * 例: "Nirvana - Nevermind" -> ["Nirvana", "Nevermind"]
@@ -50,7 +53,7 @@ export const mapDiscogsSearchResultToRecord = (result) => {
     album_name: albumName,
     release_year: result.year?.toString() || '',
     genre: primaryGenre,
-    country: result.country || '',
+    country: getCode(result.country, 'en') || '',
     size: determineSearchSize(format),
     label: label,
     compilation: isSearchCompilation(artist, format),
@@ -89,3 +92,28 @@ const isSearchCompilation = (artist, format) => {
 
   return 0;
 };
+
+function getCode(countryName, lang = 'en') {
+  // 国名からalpha-2コードを取得
+  // getName() はコードから名前を取得する関数なので、逆引きを行う getName を利用する
+  // または、すべての名前->コードのマッピングを取得して検索する
+  const alpha2Code = countries.getAlpha2Code(countryName, lang);
+
+  if (alpha2Code) {
+    return alpha2Code;
+  }
+
+  // もし直接国名からコードを取得する関数がない場合、
+  // 一旦すべてのコードを取得し、その名前と比較する方法も考えられます。
+  const allCodes = countries.getAlpha2Codes();
+  for (const code in allCodes) {
+    if (
+      countries.getName(code, lang, { select: 'official' }) === countryName ||
+      countries.getName(code, lang) === countryName
+    ) {
+      return code;
+    }
+  }
+
+  return countryName; // 見つからない場合
+}
