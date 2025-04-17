@@ -18,18 +18,16 @@
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.2;
-  max-width: 55%;
+  flex: 1;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .mobile-header-actions {
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: flex-end;
-  flex: 1;
 }
 
 @import '../../variables.css';
@@ -253,6 +251,64 @@ div[class*='image'] img,
 
 .info-value {
   color: var(--text-primary);
+}
+
+/* フォーム入力用の追加スタイル */
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.info-value .form-input {
+  margin: 0;
+}
+
+.info-table .checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.info-table .checkbox-label input[type='checkbox'] {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+}
+
+/* タイトル編集入力スタイル */
+.album-title-input,
+.artist-name-input,
+.alphabet-artist-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.album-title-input:focus,
+.artist-name-input:focus,
+.alphabet-artist-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+}
+
+.title-input-group,
+.artist-input-group,
+.alphabet-artist-input-group {
+  margin-bottom: 10px;
 }
 
 /* ===== 星評価 ===== */
@@ -723,4 +779,31 @@ label.required::after {
   .checkbox-item {
     grid-column: 1;
   }
+}
+
+/* レコード詳細コンテナ - フォーム用にも拡張 */
+.record-detail-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* フォームテーブルセル内の入力欄調整 */
+.info-value input[type='text'],
+.info-value input[type='url'],
+.info-value input[type='date'],
+.info-value select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+/* チェックボックスラベルのスタイル */
+.checkbox-text {
+  margin-left: 6px;
+  font-size: 0.95rem;
 }

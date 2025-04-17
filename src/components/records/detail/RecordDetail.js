@@ -51,33 +51,6 @@ const RecordDetail = ({
     }
   };
 
-  // ヘッダースタイル - モバイルとデスクトップで異なるスタイルを適用
-  const headerStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '16px 24px',
-    borderBottom: '1px solid var(--border-color)',
-    backgroundColor: '#fbfbfb',
-  };
-
-  // タイトルスタイル
-  const titleStyle = {
-    margin: 0,
-    fontSize: isMobile ? '1.3rem' : '1.5rem',
-    fontWeight: 600,
-    color: 'var(--text-primary)',
-    flex: 1,
-    textAlign: isMobile ? 'left' : 'left',
-  };
-
-  // ボタングループスタイル
-  const actionsStyle = {
-    display: 'flex',
-    gap: '12px',
-    alignItems: 'center',
-  };
-
   return (
     <div className="record-detail-modal">
       {isMobile ? (
@@ -109,9 +82,9 @@ const RecordDetail = ({
           </div>
         </div>
       ) : (
-        <div style={headerStyle}>
-          <h2 style={titleStyle}>{isEditing ? 'レコード編集' : 'レコード詳細'}</h2>
-          <div style={actionsStyle}>
+        <div className="detail-header">
+          <h2>{isEditing ? 'レコード編集' : 'レコード詳細'}</h2>
+          <div className="header-actions">
             {isEditing ? (
               <>
                 <button className="cancel-button" onClick={toggleEditMode}>
