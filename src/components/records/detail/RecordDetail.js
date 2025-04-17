@@ -99,11 +99,11 @@ const RecordDetail = ({
                 </button>
               </>
             ) : (
-              <button className="edit-button" onClick={toggleEditMode}>
+              <button className="edit-button" onClick={toggleEditMode} aria-label="レコード編集">
                 編集
               </button>
             )}
-            <button className="close-button" onClick={onClose}>
+            <button className="close-button" onClick={onClose} aria-label="閉じる">
               ✕
             </button>
           </div>

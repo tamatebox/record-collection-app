@@ -18,16 +18,18 @@
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.2;
-  flex: 1;
+  max-width: 55%;
   white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mobile-header-actions {
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 @import '../../variables.css';
@@ -541,6 +543,9 @@ label.required::after {
   cursor: pointer;
   border: none;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .edit-button {
@@ -553,6 +558,9 @@ label.required::after {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* モバイル用その他調整 */
@@ -566,12 +574,23 @@ label.required::after {
   .cancel-button {
     padding: 6px 12px;
     font-size: 13px;
+    min-width: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
   }
 
   .close-button {
     width: 28px;
     height: 28px;
     font-size: 1.3rem;
+    margin-left: 5px;
+  }
+
+  .mobile-header-actions .edit-button {
+    margin-left: auto;
   }
 }
 
