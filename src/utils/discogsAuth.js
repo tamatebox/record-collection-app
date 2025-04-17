@@ -218,10 +218,9 @@ export const validateAuthentication = async () => {
 /**
  * 認証を行う関数
  * 自動認証のみを使用
- * @param {boolean} tryAuto - 自動認証を試みるかどうか (常にtrueとして扱われる)
  * @returns {Promise<string|null>} 取得したトークンまたはnull
  */
-export const authenticate = async (tryAuto = true) => {
+export const authenticate = async () => {
   // 既存のトークンをチェック
   if (isDiscogsAuthenticated()) {
     return getDiscogsToken();
@@ -231,7 +230,7 @@ export const authenticate = async (tryAuto = true) => {
     // 自動認証を試行
     return await performAutoAuth();
   } catch (error) {
-    console.log('自動認証失敗、トークンは利用できません');
+    console.error('自動認証失敗、トークンは利用できません');
     // 自動認証が失敗した場合はトークンなしを返す
     return null;
   }

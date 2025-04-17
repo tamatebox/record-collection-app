@@ -1,0 +1,17 @@
+repos:
+-   repo: local
+    hooks:
+    # -   id: eslint-fix
+    #     name: ESLint Fix
+    #     entry: npm run lint:eslint -- --fix --max-warnings=0 # エラーのみをチェック
+    #     language: system
+    #     files: \.(js|jsx|ts|tsx)$
+    #     types: [file]
+    #     pass_filenames: false
+
+    -   id: prettier-write
+        name: Prettier Write
+        entry: npm run lint:prettier -- --write
+        language: system
+        types_or: [javascript, jsx, tsx, json, css, scss, markdown]
+        pass_filenames: false

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import RecordDetailView from './RecordDetailView';
 import RecordForm from '../form/RecordForm';
 import '../../../styles/components/records/recordDetail.css';

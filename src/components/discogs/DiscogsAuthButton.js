@@ -36,7 +36,7 @@ const DiscogsAuthButton = ({ className, onRetry }) => {
         <p>環境変数に正しいトークンが設定されていない可能性があります。</p>
         <ol style={{ marginLeft: '20px', paddingLeft: '0' }}>
           <li>Discogsアカウントにログインしてください。</li>
-          <li>設定 > 開発者に移動してください。</li>
+          <li>設定 {'>'} 開発者に移動してください。</li>
           <li>"Generate new token"ボタンをクリックしてトークンを生成してください。</li>
           <li>
             サーバーの`.env`ファイルに`DISCOGS_PERSONAL_ACCESS_TOKEN=生成したトークン`を設定してください。

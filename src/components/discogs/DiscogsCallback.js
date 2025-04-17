@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 // OAuth認証は無効化されたため、このページはリダイレクトのみを行う

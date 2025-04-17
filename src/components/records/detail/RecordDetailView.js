@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import RecordStars from '../../common/RecordStars';
 import '../../../styles/components/records/recordDetail.css';
 import DefaultRecordImage from '../../../assets/default-record.svg';

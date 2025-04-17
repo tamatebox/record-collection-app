@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { discogsSearch } from '../../utils/discogsAuth';
 import { useDiscogsAuth } from '../../contexts/DiscogsAuthContext';
 import { mapDiscogsSearchResultToRecord } from '../../utils/discogsMapper';
@@ -83,7 +83,7 @@ const DiscogsSearch = ({ onSelectRecord, onCancel }) => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="アーティスト名やアルバム名を入力"
+              placeholder="カタログナンバーやアルバム名を入力"
               className="search-input"
               disabled={loading}
             />
