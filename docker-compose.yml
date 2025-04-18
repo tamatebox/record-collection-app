@@ -29,6 +29,7 @@ services:
       - "3001:3001"
     volumes:
       - ./server:/app/server
+      - ./public:/app/public
       - ./server/records.db:/app/server/records.db
     env_file:
       - .env

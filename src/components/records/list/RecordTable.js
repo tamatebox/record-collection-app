@@ -76,8 +76,8 @@ const RecordTable = ({ records, onRecordSelect, onRecordDelete, onSort, sortConf
         </thead>
         <tbody>
           {records.map((record) => {
-            // サムネイル画像パスを生成
-            const thumbnailPath = `/images/record-covers/thumbnails/record_${record.id}_thumbnail.jpeg`;
+            // 画像パスを取得 - DBからの値を使用
+            const imagePath = record.full_image || null;
             const hasImageError = imageErrors[record.id];
 
             return (
@@ -95,7 +95,7 @@ const RecordTable = ({ records, onRecordSelect, onRecordDelete, onSort, sortConf
                 <td role="cell" className="record-thumbnail-cell">
                   <div className="record-thumbnail-container">
                     <img
-                      src={hasImageError ? DefaultRecordImage : thumbnailPath}
+                      src={hasImageError || !imagePath ? DefaultRecordImage : imagePath}
                       alt={`${record.album_name}のジャケット`}
                       className="record-thumbnail"
                       onError={() => handleImageError(record.id)}

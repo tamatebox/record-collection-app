@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 // 設定モジュール
@@ -22,6 +25,18 @@ const corsOrigins = [
   'http://localhost:3000'  // 開発環境用の追加オプション
 ].filter(Boolean);  // nullや空文字を除外
 
+// 画像保存ディレクトリの確保
+const imageDirs = [
+  path.join(__dirname, '../public/images/record-covers/full-size'),
+];
+
+// ディレクトリが存在しない場合は作成
+imageDirs.forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    console.log(`ディレクトリを作成しました: ${dir}`);
+  }
+});
 
 // アプリケーションの初期化
 const app = express();
@@ -38,6 +53,9 @@ app.use(cors({
 // 基本的なミドルウェア
 app.use(createSessionConfig());
 app.use(express.json());
+
+// 静的ファイル配信
+app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')));
 
 // リクエストログ
 app.use((req, res, next) => {

@@ -24,8 +24,8 @@ const RecordCards = ({ records, onRecordSelect, onRecordDelete }) => {
   return (
     <div className="record-cards">
       {records.map((record) => {
-        // サムネイル画像パスを生成
-        const thumbnailPath = `/images/record-covers/full-size/record_${record.id}_full.jpeg`;
+        // 画像パスを取得 - DBからの値を使用
+        const imagePath = record.full_image || null;
         const hasImageError = imageErrors[record.id];
 
         return (
@@ -44,7 +44,7 @@ const RecordCards = ({ records, onRecordSelect, onRecordDelete }) => {
           >
             <div className="record-card-image">
               <img
-                src={hasImageError ? DefaultRecordImage : thumbnailPath}
+                src={hasImageError || !imagePath ? DefaultRecordImage : imagePath}
                 alt={`${record.album_name}のジャケット`}
                 className="card-cover-image"
                 onError={() => handleImageError(record.id)}

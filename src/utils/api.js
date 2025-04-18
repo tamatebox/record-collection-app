@@ -14,6 +14,15 @@ const api = axios.create({
   },
 });
 
+// FormDataを含むリクエスト用のヘッダー設定関数
+const setMultipartHeaders = (config) => {
+  config.headers = {
+    ...config.headers,
+    'Content-Type': 'multipart/form-data',
+  };
+  return config;
+};
+
 // レコードの取得
 export const getRecords = async () => {
   try {
@@ -36,10 +45,23 @@ export const getRecordById = async (id) => {
   }
 };
 
-// レコードの追加
+// レコードの追加（FormDataに対応）
 export const addRecord = async (recordData) => {
   try {
-    const response = await api.post('/records', recordData);
+    let response;
+
+    // FormDataオブジェクトの場合（ファイルアップロードあり）
+    if (recordData instanceof FormData) {
+      response = await axios.post(`${API_BASE_URL}/records`, recordData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } else {
+      // 通常のJSONデータの場合
+      response = await api.post('/records', recordData);
+    }
+
     return response.data;
   } catch (error) {
     console.error('レコードの追加中にエラーが発生しました:', error);
@@ -47,10 +69,23 @@ export const addRecord = async (recordData) => {
   }
 };
 
-// レコードの更新
+// レコードの更新（FormDataに対応）
 export const updateRecord = async (id, recordData) => {
   try {
-    const response = await api.put(`/records/${id}`, recordData);
+    let response;
+
+    // FormDataオブジェクトの場合（ファイルアップロードあり）
+    if (recordData instanceof FormData) {
+      response = await axios.put(`${API_BASE_URL}/records/${id}`, recordData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } else {
+      // 通常のJSONデータの場合
+      response = await api.put(`/records/${id}`, recordData);
+    }
+
     return response.data;
   } catch (error) {
     console.error(`ID ${id} のレコード更新中にエラーが発生しました:`, error);
@@ -87,6 +122,17 @@ export const getDiscogsRelease = async (releaseId) => {
     return response.data;
   } catch (error) {
     console.error(`リリースID ${releaseId} の取得中にエラーが発生しました:`, error);
+    throw error;
+  }
+};
+
+// Discogsの画像URLからレコード画像をダウンロード
+export const downloadDiscogsImage = async (imageUrl) => {
+  try {
+    const response = await api.post('/discogs/download-image', { imageUrl });
+    return response.data;
+  } catch (error) {
+    console.error('画像ダウンロード中にエラーが発生しました:', error);
     throw error;
   }
 };

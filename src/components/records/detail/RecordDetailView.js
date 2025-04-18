@@ -26,8 +26,8 @@ const RecordDetailView = ({ record }) => {
     };
   }, []);
 
-  // 画像パス生成
-  const fullImagePath = `/images/record-covers/full-size/record_${record.id}_full.jpeg`;
+  // 画像パスはデータベースから取得
+  const imagePath = record.full_image || null;
 
   // 画像読み込みエラーハンドラー
   const handleImageError = () => {
@@ -99,7 +99,7 @@ const RecordDetailView = ({ record }) => {
       >
         <div style={imageContainerStyle}>
           <img
-            src={imageError ? DefaultRecordImage : fullImagePath}
+            src={imageError || !imagePath ? DefaultRecordImage : imagePath}
             alt={`${record.album_name} のジャケット`}
             style={imageStyle}
             onClick={openFullImage}
@@ -237,7 +237,7 @@ const RecordDetailView = ({ record }) => {
       {showFullImage && (
         <div className="image-modal" onClick={closeFullImage}>
           <img
-            src={fullImagePath}
+            src={imagePath || DefaultRecordImage}
             alt={`${record.album_name} 拡大画像`}
             className="modal-image"
             onClick={(e) => e.stopPropagation()}

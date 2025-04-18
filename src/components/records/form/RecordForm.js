@@ -1,8 +1,8 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 import DiscogsSearch from '../../discogs/DiscogsSearch';
 import RecordStars from '../../common/RecordStars';
 import DefaultRecordImage from '../../../assets/default-record.svg';
-import '../../../styles/components/records/recordForm.css';
+import '../../../styles/components/records/recordDetail.css';
 
 /**
  * 改良版レコードフォーム - 詳細画面のUIに合わせた編集フォーム
@@ -46,8 +46,11 @@ const RecordForm = forwardRef(
     // Discogsから情報が読み込まれたかを記録
     const [isDiscogsDataLoaded, setIsDiscogsDataLoaded] = useState(false);
 
-    // 画像エラー状態
+    // 画像関連の状態
     const [imageError, setImageError] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+    const fileInputRef = useRef(null);
 
     // モバイル表示判定
     const [isMobile, setIsMobile] = useState(false);
@@ -70,11 +73,14 @@ const RecordForm = forwardRef(
       };
     }, []);
 
-    // 画像パス生成（編集モードの場合）
-    const fullImagePath =
-      mode === 'edit' && initialRecord
-        ? `/images/record-covers/full-size/record_${initialRecord.id}_full.jpeg`
-        : null;
+    // 編集モードの場合、DBからの画像パスを使用
+    useEffect(() => {
+      // 初期化時にレコードの画像パスがあれば使用する
+      if (mode === 'edit' && initialRecord && initialRecord.full_image) {
+        // 最初にエラー状態をリセット
+        setImageError(false);
+      }
+    }, [mode, initialRecord]);
 
     // 画像読み込みエラーハンドラー
     const handleImageError = () => {
@@ -91,6 +97,41 @@ const RecordForm = forwardRef(
 
       // Discogsからデータが読み込まれたことを記録
       setIsDiscogsDataLoaded(true);
+
+      // Discogsから画像URLがある場合、プレビューを設定
+      if (discogsRecord.coverImage) {
+        setImagePreview(discogsRecord.coverImage);
+      }
+    };
+
+    // 画像アップロードハンドラー
+    const handleImageUpload = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      // ファイルサイズチェック (2MB制限)
+      if (file.size > 2 * 1024 * 1024) {
+        alert('ファイルサイズは2MB以内にしてください');
+        return;
+      }
+
+      // 画像プレビュー生成
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImagePreview(event.target.result);
+      };
+      reader.readAsDataURL(file);
+
+      // ファイル保存
+      setImageFile(file);
+
+      // Discogsからの画像URLがある場合、それをクリア
+      if (formData.coverImage) {
+        setFormData((prev) => ({
+          ...prev,
+          coverImage: null,
+        }));
+      }
     };
 
     // フォーム項目変更ハンドラー
@@ -113,7 +154,23 @@ const RecordForm = forwardRef(
     // フォーム送信ハンドラー
     const handleSubmit = (e) => {
       e.preventDefault();
-      onSubmit(formData);
+
+      // FormDataオブジェクトを作成して画像とデータを追加
+      const submitData = new FormData();
+
+      // JSONデータの追加
+      submitData.append('data', JSON.stringify(formData));
+
+      // 画像ファイルの追加（あれば）
+      if (imageFile) {
+        submitData.append('coverImage', imageFile);
+      }
+      // Discogsからの画像URLがある場合（アップロードされた画像がない場合）
+      else if (formData.coverImage && !imagePreview) {
+        submitData.append('coverImageUrl', formData.coverImage);
+      }
+
+      onSubmit(submitData);
     };
 
     // 親コンポーネントに公開する関数
@@ -187,9 +244,15 @@ const RecordForm = forwardRef(
         >
           {/* 画像表示エリア */}
           <div style={imageContainerStyle}>
-            {mode === 'edit' && fullImagePath ? (
+            {imagePreview ? (
               <img
-                src={imageError ? DefaultRecordImage : fullImagePath}
+                src={imagePreview}
+                alt={`${formData.album_name || 'レコード'} のジャケット（プレビュー）`}
+                style={imageStyle}
+              />
+            ) : mode === 'edit' && initialRecord && initialRecord.full_image ? (
+              <img
+                src={imageError ? DefaultRecordImage : initialRecord.full_image}
                 alt={`${formData.album_name || 'レコード'} のジャケット`}
                 style={imageStyle}
                 onError={handleImageError}
@@ -209,6 +272,44 @@ const RecordForm = forwardRef(
                 <span>画像なし</span>
               </div>
             )}
+
+            {/* 画像アップロードボタン */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '8px',
+                right: '8px',
+                zIndex: 10,
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '36px',
+                  height: '36px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  fontSize: '18px',
+                }}
+                title="画像をアップロード"
+              >
+                +
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+              />
+            </div>
           </div>
 
           {/* タイトル情報入力エリア */}

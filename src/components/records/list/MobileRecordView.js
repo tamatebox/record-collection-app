@@ -49,7 +49,7 @@ const MobileRecordView = ({ records, onRecordSelect, onRecordDelete, viewMode })
       {viewMode === 'card' && (
         <div className="mobile-grid-view">
           {records.map((record) => {
-            const thumbnailPath = `/images/record-covers/full-size/record_${record.id}_full.jpeg`;
+            const imagePath = record.full_image || null;
             const hasImageError = imageErrors[record.id];
 
             return (
@@ -60,7 +60,7 @@ const MobileRecordView = ({ records, onRecordSelect, onRecordDelete, viewMode })
               >
                 <div className="mobile-grid-image">
                   <img
-                    src={hasImageError ? DefaultRecordImage : thumbnailPath}
+                    src={hasImageError || !imagePath ? DefaultRecordImage : imagePath}
                     alt={`${record.album_name}のジャケット`}
                     onError={() => handleImageError(record.id)}
                   />
@@ -79,7 +79,7 @@ const MobileRecordView = ({ records, onRecordSelect, onRecordDelete, viewMode })
       {viewMode === 'table' && (
         <div className="mobile-list-view">
           {records.map((record) => {
-            const thumbnailPath = `/images/record-covers/thumbnails/record_${record.id}_thumbnail.jpeg`;
+            const imagePath = record.full_image || null;
             const hasImageError = imageErrors[record.id];
 
             return (
@@ -87,7 +87,7 @@ const MobileRecordView = ({ records, onRecordSelect, onRecordDelete, viewMode })
                 <div className="mobile-list-content" onClick={() => onRecordSelect(record)}>
                   <div className="mobile-list-image">
                     <img
-                      src={hasImageError ? DefaultRecordImage : thumbnailPath}
+                      src={hasImageError || !imagePath ? DefaultRecordImage : imagePath}
                       alt={`${record.album_name}のジャケット`}
                       onError={() => handleImageError(record.id)}
                     />

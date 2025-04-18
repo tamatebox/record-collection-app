@@ -1,21 +1,13 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
+const sharp = require('sharp');
 
 // Discogs API基本設定
 const DISCOGS_API_BASE = 'https://api.discogs.com';
 const PERSONAL_ACCESS_TOKEN = process.env.DISCOGS_PERSONAL_ACCESS_TOKEN;
-
-// APIキーの検証
-const validateApiKeys = () => {
-  const { DISCOGS_CONSUMER_KEY, DISCOGS_CONSUMER_SECRET } = process.env;
-
-  if (!DISCOGS_CONSUMER_KEY || !DISCOGS_CONSUMER_SECRET ||
-      DISCOGS_CONSUMER_KEY === 'your_consumer_key' ||
-      DISCOGS_CONSUMER_SECRET === 'your_consumer_secret') {
-    throw new Error('DiscogsのAPIキーが正しく設定されていません。環境変数を確認してください。');
-  }
-};
 
 // リクエストからトークンを取得
 const getTokenFromRequest = (req) => {
@@ -40,6 +32,39 @@ const getTokenFromRequest = (req) => {
 const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
+// 画像URLからファイルをダウンロードする関数
+async function downloadImage(imageUrl, recordId) {
+  try {
+    // ディレクトリのパス
+    const fullSizeDir = path.join(__dirname, '../../public/images/record-covers/full-size');
+
+    // ディレクトリが存在しない場合は作成
+    if (!fs.existsSync(fullSizeDir)) {
+      fs.mkdirSync(fullSizeDir, { recursive: true });
+    }
+
+    // ファイルパス
+    const fullImagePath = path.join(fullSizeDir, `record_${recordId}_full.jpeg`);
+
+    // 画像のダウンロード
+    const response = await axios({
+      url: imageUrl,
+      method: 'GET',
+      responseType: 'arraybuffer'
+    });
+
+    // フルサイズ画像の保存
+    fs.writeFileSync(fullImagePath, response.data);
+
+    return {
+      fullImagePath: `/images/record-covers/full-size/record_${recordId}_full.jpeg`,
+    };
+  } catch (error) {
+    console.error('画像ダウンロード中にエラーが発生しました:', error);
+    throw error;
+  }
+}
+
 // ユーザー情報取得エンドポイント
 router.get('/identity', asyncHandler(async (req, res) => {
   const accessToken = getTokenFromRequest(req);
@@ -50,7 +75,8 @@ router.get('/identity', asyncHandler(async (req, res) => {
 
   const response = await axios.get(`${DISCOGS_API_BASE}/oauth/identity`, {
     headers: {
-      'Authorization': `Discogs token=${accessToken}`,    }
+      'Authorization': `Discogs token=${accessToken}`,
+    }
   });
 
   res.json(response.data);
@@ -79,6 +105,33 @@ router.get('/token', (req, res) => {
 router.get('/auto-token', (req, res) => {
   res.redirect('/api/discogs/token');
 });
+
+// Discogs画像をダウンロードするエンドポイント
+router.post('/download-image', asyncHandler(async (req, res) => {
+  const { imageUrl, recordId } = req.body;
+
+  if (!imageUrl) {
+    return res.status(400).json({ error: '画像URLが必要です' });
+  }
+
+  if (!recordId) {
+    return res.status(400).json({ error: 'レコードIDが必要です' });
+  }
+
+  try {
+    const imagePaths = await downloadImage(imageUrl, recordId);
+    res.json({
+      success: true,
+      imagePaths
+    });
+  } catch (error) {
+    console.error('画像ダウンロード中にエラーが発生しました:', error);
+    res.status(500).json({
+      error: '画像のダウンロードに失敗しました',
+      details: error.message
+    });
+  }
+}));
 
 // 注: 手動認証関連のエンドポイントは無効化されています
 // アクセストークンの取得
@@ -134,6 +187,7 @@ router.get('/search', asyncHandler(async (req, res) => {
     label: result.label ? result.label[0] : null,
     catno: result.catno ? result.catno : null,
     coverImage: result.cover_image,
+    thumb: result.thumb,
     resourceUrl: result.resource_url
   }));
 
