@@ -46,18 +46,25 @@ async function downloadImage(imageUrl, recordId) {
     // ファイルパス
     const fullImagePath = path.join(fullSizeDir, `record_${recordId}_full.jpeg`);
 
-    // 画像のダウンロード
+    // 画像のダウンロード - ブラウザのように見せるヘッダーを追加
     const response = await axios({
       url: imageUrl,
       method: 'GET',
-      responseType: 'arraybuffer'
+      responseType: 'arraybuffer',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
+        'Referer': 'https://www.discogs.com/',
+        'Origin': 'https://www.discogs.com',
+        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9,ja;q=0.8'
+      }
     });
 
     // フルサイズ画像の保存
     fs.writeFileSync(fullImagePath, response.data);
 
     return {
-      fullImagePath: `/images/record-covers/full-size/record_${recordId}_full.jpeg`,
+      fullImagePath: fullImagePath,
     };
   } catch (error) {
     console.error('画像ダウンロード中にエラーが発生しました:', error);

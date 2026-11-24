@@ -127,9 +127,12 @@ export const getDiscogsRelease = async (releaseId) => {
 };
 
 // Discogsの画像URLからレコード画像をダウンロード
-export const downloadDiscogsImage = async (imageUrl) => {
+export const downloadDiscogsImage = async (imageUrl, recordId = 'new') => {
   try {
-    const response = await api.post('/discogs/download-image', { imageUrl });
+    const response = await api.post('/discogs/download-image', { 
+      imageUrl, 
+      recordId 
+    });
     return response.data;
   } catch (error) {
     console.error('画像ダウンロード中にエラーが発生しました:', error);

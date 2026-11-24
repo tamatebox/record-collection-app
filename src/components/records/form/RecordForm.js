@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
+import { downloadDiscogsImage } from '../../../utils/api';
 import DiscogsSearch from '../../discogs/DiscogsSearch';
 import RecordStars from '../../common/RecordStars';
 import DefaultRecordImage from '../../../assets/default-record.svg';
@@ -152,11 +153,28 @@ const RecordForm = forwardRef(
     };
 
     // フォーム送信ハンドラー
-    const handleSubmit = (e) => {
-      e.preventDefault();
+    const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    try {
       // FormDataオブジェクトを作成して画像とデータを追加
       const submitData = new FormData();
+      
+      // Discogsからの画像URLがある場合（アップロードされた画像がない場合）先にダウンロード処理
+      if (formData.coverImage && !imageFile) {
+        console.log('Discogsの画像をダウンロードします:', formData.coverImage);
+        
+      // 画像をサーバーにダウンロード
+        const result = await downloadDiscogsImage(formData.coverImage, formData.id || 'new');
+        
+        if (result && result.success) {
+        console.log('画像ダウンロード成功:', result);
+          // ダウンロードした画像情報をフォームデータに設定
+          submitData.append('downloadedImagePath', JSON.stringify(result.imagePaths));
+        } else {
+            console.warn('画像ダウンロードに失敗しました');
+        }
+      }
 
       // JSONデータの追加
       submitData.append('data', JSON.stringify(formData));
@@ -165,13 +183,17 @@ const RecordForm = forwardRef(
       if (imageFile) {
         submitData.append('coverImage', imageFile);
       }
-      // Discogsからの画像URLがある場合（アップロードされた画像がない場合）
-      else if (formData.coverImage && !imagePreview) {
+      // Discogsからの画像URLがある場合（画像ダウンロード済みの情報は上ですでに追加済み）
+      else if (formData.coverImage) {
         submitData.append('coverImageUrl', formData.coverImage);
       }
 
       onSubmit(submitData);
-    };
+    } catch (error) {
+      console.error('フォーム送信処理中にエラーが発生しました:', error);
+      alert(`エラーが発生しました: ${error.message}`);
+    }
+  };
 
     // 親コンポーネントに公開する関数
     useImperativeHandle(ref, () => ({

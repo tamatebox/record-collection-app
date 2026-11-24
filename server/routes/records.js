@@ -82,7 +82,6 @@ async function downloadImage(imageUrl, recordId) {
   }
 }
 
-// サムネイル関連の処理は削除します
 
 // すべてのレコードを取得する
 router.get('/', (req, res) => {
@@ -144,7 +143,6 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
 
         fs.renameSync(originalPath, newPath);
 
-        // サムネイルの作成は不要
 
         imagePath = `/images/record-covers/full-size/record_${newId}_full${ext}`;
       }
@@ -230,7 +228,6 @@ router.put('/:id', upload.single('coverImage'), async (req, res) => {
 
     // ファイルアップロードの処理
     if (req.file) {
-      // サムネイルの作成
 
       imagePath = `/images/record-covers/full-size/record_${id}_full${path.extname(req.file.originalname).toLowerCase()}`;
     }
@@ -332,7 +329,6 @@ router.delete('/:id', (req, res) => {
           fs.unlinkSync(fullImagePath);
         }
       }
-      // サムネイル画像は使用しないので削除処理も不要
     }
 
     // レコードの削除
